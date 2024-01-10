@@ -6,4 +6,7 @@ PYTHON ROADMAP
 Chapters completed:
 
 BASICS
+
 NUMBERS
+
+BOOLS 2/3
