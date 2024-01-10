@@ -7,6 +7,6 @@ Chapters completed:
 
 BASICS
 
-NUMBERS
+NUMBERS 4/5
 
 BOOLS 2/3
