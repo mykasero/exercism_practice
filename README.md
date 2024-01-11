@@ -9,4 +9,6 @@ BASICS
 
 NUMBERS 4/5
 
-BOOLS 2/3
+BOOLS 3/3
+
+Conditionals 3/5
