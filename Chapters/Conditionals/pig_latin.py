@@ -8,10 +8,10 @@ def translate(text):
 
     word = text
     iter = 0
-    for i in range(len(text) - 1):
-        if text[i] == 'y':
-            break
-        iter += 1
+    #for i in range(len(text) - 1):
+    #    if text[i] == 'y':
+    #        break
+    #    iter += 1
 
     if " " in text:
         text = text.split()
