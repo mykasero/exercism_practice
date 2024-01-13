@@ -12,3 +12,5 @@ NUMBERS 4/5
 BOOLS 3/3
 
 Conditionals 4/5
+
+Strings 2/5
