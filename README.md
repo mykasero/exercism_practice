@@ -13,4 +13,4 @@ BOOLS 3/3
 
 Conditionals 4/5
 
-Strings 4/5
+Strings 5/5
