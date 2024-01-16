@@ -15,11 +15,11 @@ def value_of_card(card):
     2.  'A' (ace card) = 1
     3.  '2' - '10' = numerical value.
     """
-    Card_symbol_val = {"K": 10, "Q": 10, "J": 10, "A": 1}
+    card_symbol_val = {"K" : 10, "Q" : 10, "J" : 10, "A" : 1}
     total_value = 0
     # for cards in card:
-    if card in Card_symbol_val:
-        total_value += Card_symbol_val[card]
+    if card in card_symbol_val:
+        total_value += card_symbol_val[card]
     else:
         total_value += int(card)
 
@@ -37,27 +37,31 @@ def higher_card(card_one, card_two):
     3.  '2' - '10' = numerical value.
     """
 
-    Card_symbol_val = {"K": 10, "Q": 10, "J": 10, "A": 1}
+    card_symbol_val = {"K" : 10, "Q" : 10, "J" : 10, "A" : 1}
     value_one = 0
     value_two = 0
-    if card_one in Card_symbol_val:
-        value_one = Card_symbol_val[card_one]
+    return_val = None
+    if card_one in card_symbol_val:
+        value_one = card_symbol_val.get(card_one)
     else:
         value_one = int(card_one)
 
-    if card_two in Card_symbol_val:
-        value_two = Card_symbol_val[card_two]
+    if card_two in card_symbol_val:
+        value_two = card_symbol_val.get(card_two)
     else:
         value_two = int(card_two)
 
-    if value_one == value_two:
-        return card_one, card_two
-    elif int(value_one) > int(value_two):
-        return card_one
-    elif int(value_two) > int(value_one):
-        return card_two
 
-################### TO DO #########################
+    if value_one == value_two:
+        return_val =  (card_one,card_two)
+    elif int(value_one) > int(value_two):
+        return_val = card_one
+    elif int(value_two) > int(value_one):
+        return_val = card_two
+
+    return return_val
+
+
 def value_of_ace(card_one, card_two):
     """Calculate the most advantageous value for the ace card.
 
@@ -68,8 +72,32 @@ def value_of_ace(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
+    card_symbol_val = {"K" : 10, "Q" : 10, "J" : 10, "A" : 11}
+    value_one = 0
+    value_two = 0
+    hand_value = 0
+    ace_value = 0
 
-    pass
+    if card_one in card_symbol_val:
+        value_one = card_symbol_val.get(card_one)
+    else:
+        value_one = int(card_one)
+
+    if card_two in card_symbol_val:
+        value_two = card_symbol_val.get(card_two)
+    else:
+        value_two = int(card_two)
+
+    hand_value = value_one + value_two
+
+    if hand_value + 11 >= 22:
+        ace_value = 1
+    elif hand_value + 11 <= 21:
+        ace_value = 11
+
+
+
+    return ace_value
 
 
 def is_blackjack(card_one, card_two):
@@ -82,8 +110,28 @@ def is_blackjack(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
+    is_true = False
 
-    pass
+    card_symbol_val = {"K" : 10, "Q" : 10, "J" : 10, "A" : 11}
+    value_one = 0
+    value_two = 0
+
+    if card_one in card_symbol_val:
+        value_one = card_symbol_val.get(card_one)
+    else:
+        value_one = int(card_one)
+
+    if card_two in card_symbol_val:
+        value_two = card_symbol_val.get(card_two)
+    else:
+        value_two = int(card_two)
+
+    if value_one + value_two == 21:
+        is_true = True
+    else:
+        pass
+
+    return is_true
 
 
 def can_split_pairs(card_one, card_two):
@@ -92,8 +140,30 @@ def can_split_pairs(card_one, card_two):
     :param card_one, card_two: str - cards dealt.
     :return: bool - can the hand be split into two pairs? (i.e. cards are of the same value).
     """
+    can_split = False
 
-    pass
+    card_symbol_val = {"K" : 10, "Q" : 10, "J" : 10, "A" : 11}
+    value_one = 0
+    value_two = 0
+
+    if card_one in card_symbol_val:
+        value_one = card_symbol_val.get(card_one)
+    else:
+        value_one = int(card_one)
+
+    if card_two in card_symbol_val:
+        value_two = card_symbol_val.get(card_two)
+    else:
+        value_two = int(card_two)
+
+    if value_one == value_two:
+        can_split = True
+    else:
+        pass
+
+    return can_split
+
+
 
 
 def can_double_down(card_one, card_two):
@@ -102,5 +172,25 @@ def can_double_down(card_one, card_two):
     :param card_one, card_two: str - first and second cards in hand.
     :return: bool - can the hand can be doubled down? (i.e. totals 9, 10 or 11 points).
     """
+    is_true = False
 
-    pass
+    card_symbol_val = {"K" : 10, "Q" : 10, "J" : 10, "A" : 1}
+    value_one = 0
+    value_two = 0
+
+    if card_one in card_symbol_val:
+        value_one = card_symbol_val.get(card_one)
+    else:
+        value_one = int(card_one)
+
+    if card_two in card_symbol_val:
+        value_two = card_symbol_val.get(card_two)
+    else:
+        value_two = int(card_two)
+
+    if value_one + value_two in [9,10,11]:
+        is_true = True
+    else:
+        pass
+
+    return is_true
