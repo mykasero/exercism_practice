@@ -17,4 +17,4 @@ Strings 5/5
 
 String_Methods 1/X
 
-Comparisions 0.5/5
+Comparisions 3/5
