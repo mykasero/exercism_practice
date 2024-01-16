@@ -15,6 +15,6 @@ Conditionals 4/5
 
 Strings 5/5
 
-String_Methods 1/X
+String_Methods 1/4
 
 Comparisions 3/5
