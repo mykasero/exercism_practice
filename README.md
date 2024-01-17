@@ -18,3 +18,5 @@ Strings 5/5
 String_Methods 1/4
 
 Comparisions 3/5
+
+Lists = 1/6
