@@ -19,4 +19,4 @@ String_Methods 1/4
 
 Comparisions 3/5
 
-Lists = 3/6
+Lists 3/6
