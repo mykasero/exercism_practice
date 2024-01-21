@@ -20,3 +20,5 @@ String_Methods 1/4
 Comparisions 4/5 
 
 Lists 3/6
+
+List_methods 1/6
