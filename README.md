@@ -21,4 +21,4 @@ Comparisions 4/5
 
 Lists 3/6
 
-List_methods 1/7
+List_methods 2/7
