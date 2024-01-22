@@ -22,3 +22,5 @@ Comparisions 4/5
 Lists 3/6
 
 List_methods 2/7
+
+Loops 1/x
