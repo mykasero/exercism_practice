@@ -7,10 +7,12 @@ def round_scores(student_scores):
     :param student_scores: list - float or int of student exam scores.
     :return: list - student scores *rounded* to nearest integer value.
     """
+    
     rounded_scores = []
 
     for item in student_scores:
         rounded_scores.append(round(item))
+    
     return rounded_scores
 
 
@@ -20,10 +22,13 @@ def count_failed_students(student_scores):
     :param student_scores: list - containing int student scores.
     :return: int - count of student scores at or below 40.
     """
+    
     failing_students = 0
+    
     for item in student_scores:
         if item <= 40:
             failing_students += 1
+    
     return failing_students
 
 
@@ -34,10 +39,13 @@ def above_threshold(student_scores, threshold):
     :param threshold: int - threshold to cross to be the "best" score.
     :return: list - of integer scores that are at or above the "best" threshold.
     """
+    
     best_students = []
+    
     for score in student_scores:
         if score >= threshold:
             best_students.append(score)
+    
     return best_students
 
 
@@ -54,6 +62,7 @@ def letter_grades(highest):
             71 <= "B" <= 85
             86 <= "A" <= 100
     """
+    
     step = round((highest - 40) / 4)
     step_list = []
 
@@ -70,11 +79,14 @@ def student_ranking(student_scores, student_names):
     :param student_names: list - of string names by exam score in descending order.
     :return: list - of strings in format ["<rank>. <student name>: <score>"].
     """
+    
     rank_list = []
     number = 1
+   
     for counter in range(len(student_scores)):
         rank_list.append(str(number) + ". " + str(student_names[counter]) + ": " + str(student_scores[counter]))
         number += 1
+    
     return rank_list
 
 
@@ -84,10 +96,13 @@ def perfect_score(student_info):
     :param student_info: list - of [<student name>, <score>] lists.
     :return: list - first `[<student name>, 100]` or `[]` if no student score of 100 is found.
     """
+    
     max_scores = []
+    
     for name, score in student_info:
         if score == 100:
             max_scores.append(name)
             max_scores.append(score)
             break
+   
     return max_scores
