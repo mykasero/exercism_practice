@@ -23,4 +23,4 @@ Lists 3/6
 
 List_methods 2/7
 
-Loops 1/x
+Loops 1/6
