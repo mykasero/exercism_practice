@@ -11,7 +11,7 @@ NUMBERS 5/5
 
 BOOLS 3/3
 
-Conditionals 4/5 5 in PROGRESS
+Conditionals 5/5
 
 Strings 5/5
 
