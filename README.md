@@ -24,3 +24,5 @@ Lists 3/6
 List_methods 2/7
 
 Loops 1/6
+
+Tuples 1/6
