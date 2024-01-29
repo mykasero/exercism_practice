@@ -1,6 +1,7 @@
 PYTHON ROADMAP
 
-![image](https://github.com/mykasero/excercism_practice/assets/58263528/85e7a8f7-cf7d-4486-a3f1-b428596731ea)
+![image](![image](https://github.com/mykasero/excercism_practice/assets/58263528/0fafa47e-d4f9-412a-a5df-bd9c628f074e)
+)
 
 
 Chapters completed:
@@ -26,3 +27,5 @@ List_methods 2/7
 Loops 1/6
 
 Tuples 1/6
+
+Dictionaries 1/5
