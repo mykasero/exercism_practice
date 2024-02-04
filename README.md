@@ -34,3 +34,5 @@ Dict_methods 1/4
 Sets 1/5
 
 Unpacking and multiple assignment 1/3
+
+Classes 1/7
