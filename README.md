@@ -19,7 +19,7 @@ String_Methods 3/4
 
 Comparisions 4/5 
 
-Lists 3/6
+Lists 4/6
 
 List_methods 2/7
 
