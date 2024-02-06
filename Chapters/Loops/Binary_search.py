@@ -1,25 +1,20 @@
-base = [ 8, 16, 12, 32, 28,4, 23]
-half1 = []
-half2 = []
-base.sort()
-main = base
-iter1 = 0
-number_to_find = 23
-number_found = False
+def find(search_list, value):
+    list1 = search_list
+    number_to_find = value
+    iter1 = 0
+    if len(list1) == 0:
+        raise ValueError("value not in array")
+    else:
+        for item in list1:
+            if item == number_to_find:
+                return iter1
+                # break
+            elif iter1 == 0 and number_to_find < item or iter1 == len(list1) - 1 and number_to_find > item:
+                raise ValueError("value not in array")
+            else:
+                iter1 += 1
 
-main_center = main[int((len(main)/2))]
+    return 0
 
-while iter1>len(main)/2:
-    if number_to_find == main_center:
-        number_found = True
-        print("Y")
-        break
-    elif number_to_find < main_center:
-        half1.append(main[main.index(main_center)-iter1])
-        iter1+=1
-    elif number_to_find > main_center:
-        half2.append(main[main.index(main_center)+iter1])
-        iter1+=1
-#     # main = [0]
 
-print(half1,half2,main_center)
+# 10/11 cases done
