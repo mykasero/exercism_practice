@@ -9,12 +9,10 @@ def find(search_list, value):
             if item == number_to_find:
                 return iter1
                 # break
-            elif iter1 == 0 and number_to_find < item or iter1 == len(list1) - 1 and number_to_find > item:
+            elif iter1 == 0 and number_to_find < item or iter1 == len(
+                    list1) - 1 and number_to_find > item or number_to_find not in list1:
                 raise ValueError("value not in array")
             else:
                 iter1 += 1
 
     return 0
-
-
-# 10/11 cases done
