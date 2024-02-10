@@ -25,7 +25,7 @@ List_methods 2/7
 
 Loops 4/6 
 
-Tuples 1/6
+Tuples 1/6 2 in progress
 
 Dictionaries 1/5
 
