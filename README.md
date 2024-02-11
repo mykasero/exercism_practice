@@ -22,7 +22,7 @@ Comparisions 4/5
 
 Lists 4/6
 
-List_methods 2/7
+List_methods 3/7
 
 Loops 4/6 
 
