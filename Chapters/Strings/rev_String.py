@@ -5,3 +5,8 @@ def reverse(text):
         new_string += text[i]
 
     return new_string
+
+# or simpler
+
+def reverse(text):
+    return text[::-1]
