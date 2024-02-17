@@ -14,7 +14,7 @@ BOOLS 3/3
 
 Conditionals 5/5
 
-Strings 5/5
+Strings 6/5
 
 String_Methods 4/4
 
