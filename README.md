@@ -18,7 +18,7 @@ Strings 6/5
 
 String_Methods 4/4
 
-Comparisions 4/5 
+Comparisions 5/5  (1 Medium)
 
 Lists 4/6
 
