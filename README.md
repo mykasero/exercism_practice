@@ -22,7 +22,7 @@ Comparisions 5/5  (1 Medium)
 
 Lists 4/6
 
-List_methods 5/7
+List_methods 6/7
 
 Loops 4/6 
 
