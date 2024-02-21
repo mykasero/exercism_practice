@@ -24,7 +24,7 @@ Lists 4/6
 
 List_methods 6/7
 
-Loops 4/6 
+Loops 4/6 5 IN PROGRESS (15/17)
 
 Tuples 2/6 
 
