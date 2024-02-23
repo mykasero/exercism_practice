@@ -28,7 +28,7 @@ Loops 5/6
 
 Tuples 3/6
 
-Dictionaries 2/5
+Dictionaries 3/5
 
 Dict_methods 1/4
 
