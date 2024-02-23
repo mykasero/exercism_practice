@@ -1,51 +1,38 @@
-#17/26 passed
-number = 16
-roman = {1000 : "M", 500 : "D", 100 : "C",
-         50 : "L", 10 : "X", 5 : "V", 1 : "I"}
+def roman(number):
+    roman = {1000: "M", 900: "CM", 600: "DC", 500: "D", 400: "CD",
+             100: "C", 90: "XC", 60: "LX", 50: "L", 40: "XL",
+             10: "X", 9: "IX", 6: "VI", 5: "V", 4: "IV", 1: "I"}
+    str_number = str(number)
 
-str_number = str(number)[::-1]
+    final_string = ""
+    # max is 3999
+    list_of_elements = []
+    pwr = len(str_number) - 1
+    for item in str_number:
+        list_of_elements.append((10 ** pwr) * int(item))
+        pwr -= 1
 
-final_string = ""
-#max is 3999
-for iter_num in range(len(str_number)-1,-1,-1):
-    if iter_num == 3:
-        final_string += int(str_number[iter_num]) * "M"
-        print(iter_num, final_string)
-    elif iter_num == 2:
-        if int(str_number[iter_num]) < 4:
-            final_string += int(str_number[iter_num]) * "C"
-        elif int(str_number[iter_num]) == 4:
-            final_string += "CD"
-        elif int(str_number[iter_num]) == 5:
-            final_string += "D"
-        elif int(str_number[iter_num]) > 5 and int(str_number[iter_num])<9:
-            final_string += f"D{(int(str_number[iter_num])-5)*roman[100]}"
+    for element in list_of_elements:
+        if element >= 1000:
+            final_string += f"{int(element / 1000) * roman[1000]}"
+        elif 600 < element < 900:
+            final_string += f"D{(int((element / 100)) - 5) * roman[100]}"
+        ###etc worth trying
+        elif 100 < element < 400:
+            final_string += f"{(int(element / 100)) * roman[100]}"
+        elif 60 < element < 90:
+            final_string += f"L{(int((element / 10)) - 5) * roman[10]}"
+        elif 10 < element < 40:
+            final_string += f"{(int(element / 10)) * roman[10]}"
+        elif 6 < element < 9:
+            final_string += f"V{(int(element - 5)) * roman[1]}"
+        elif 1 < element < 4:
+            final_string += f"{int(element) * roman[1]}"
         else:
-            final_string += "CM"
-        print(iter_num, final_string)
-    elif iter_num == 1:
-        if int(str_number[iter_num]) < 4:
-            final_string += int(str_number[iter_num]) * "X"
-        elif int(str_number[iter_num]) == 4:
-            final_string += "XL"
-        elif int(str_number[iter_num]) == 5:
-            final_string += "L"
-        elif int(str_number[iter_num]) > 5 and int(str_number[iter_num]) < 9:
-            final_string += f"L{(int(str_number[iter_num])-5) * roman[10]}"
-        else:
-            final_string += "XC"
-        print(iter_num, final_string)
-    else:
-        if int(str_number[iter_num]) < 4:
-            final_string += int(str_number[iter_num]) * "I"
-        elif int(str_number[iter_num]) == 4:
-            final_string += "IV"
-        elif int(str_number[iter_num]) == 5:
-            final_string += "V"
-        elif 5 < int(str_number[iter_num]) < 9:
-            final_string += f"V{(int(str_number[iter_num])-5) * roman[1]}"
-        else:
-            final_string += "IX"
-        print(iter_num,final_string)
+            if element == 0:
+                pass
+            else:
+                final_string += roman[element]
 
-print(final_string)
+    return final_string
+
