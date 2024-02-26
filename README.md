@@ -39,3 +39,5 @@ Unpacking and multiple assignment 1/3
 Classes 1/7
 
 Generators = 1/2
+
+Not categorized = 1/x
