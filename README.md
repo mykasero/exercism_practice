@@ -25,7 +25,7 @@ Lists 4/6
 List_methods 6/7
 
 Loops 5/6 
-
+x
 Tuples 3/6
 
 Dictionaries 3/5
