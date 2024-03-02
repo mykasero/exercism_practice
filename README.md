@@ -30,7 +30,7 @@ Tuples 3/6
 
 Dictionaries 4/5
 
-Dict_methods 2/4
+Dict_methods 3/4
 
 Sets 1/5
 
