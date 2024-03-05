@@ -3,6 +3,7 @@ PYTHON ROADMAP
 Every exercise has a description pasted under the code and the link to the test cases.
 
 Image representation of the chapters 
+
 (![image](https://github.com/mykasero/excercism_practice/assets/58263528/0fafa47e-d4f9-412a-a5df-bd9c628f074e)
 
 ![image](https://github.com/mykasero/excercism_practice/assets/58263528/705ef47f-2093-4b8b-b39f-8ded8abdd800)
