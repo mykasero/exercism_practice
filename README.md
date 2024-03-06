@@ -36,7 +36,7 @@ Dictionaries 4/5
 
 Dict_methods 3/4
 
-Sets 1/5
+Sets 2/5
 
 Unpacking and multiple assignment 1/3
 
