@@ -1,3 +1,20 @@
+def square(number):
+    if number > 0 and number < 65:
+        GRAIN_AMOUNT = 1
+        for grain in range(2,number+1):
+            GRAIN_AMOUNT *= 2
+        return GRAIN_AMOUNT
+    else:
+        raise ValueError("square must be between 1 and 64")
+def total():
+    GRAIN_TOTAL = 1
+    square_grain_amount = 1
+    for grain in range(2,65):
+        square_grain_amount *= 2
+        GRAIN_TOTAL += square_grain_amount
+        print(GRAIN_TOTAL)
+    return GRAIN_TOTAL
+
 '''
 Instructions
 Calculate the number of grains of wheat on a chessboard given that the number on each square doubles.
@@ -20,19 +37,6 @@ To raise a ValueError with a message, write the message as an argument to the ex
 # when the square value is not in the acceptable range        
 raise ValueError("square must be between 1 and 64")
 '''
-def square(number):
-    if number > 0 and number < 65:
-        GRAIN_AMOUNT = 1
-        for grain in range(2,number+1):
-            GRAIN_AMOUNT *= 2
-        return GRAIN_AMOUNT
-    else:
-        raise ValueError("square must be between 1 and 64")
-def total():
-    GRAIN_TOTAL = 1
-    square_grain_amount = 1
-    for grain in range(2,65):
-        square_grain_amount *= 2
-        GRAIN_TOTAL += square_grain_amount
-        print(GRAIN_TOTAL)
-    return GRAIN_TOTAL
+
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/grains/canonical-data.json
