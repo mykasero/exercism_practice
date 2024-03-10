@@ -44,4 +44,4 @@ Classes 3/7
 
 Generators = 1/2
 
-Not categorized = 2/x
+Not categorized = 3/x
