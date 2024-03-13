@@ -1,3 +1,12 @@
+def leap_year(year):
+    leap_yr = False
+
+    if year % 4 == 0 and year % 400 == 0 or year % 100 == 0 and year % 400 == 0 or year % 4 == 0 and not year % 100 == 0:
+        leap_yr=True
+
+    return leap_yr
+
+
 '''
 Introduction
 A leap year (in the Gregorian calendar) occurs:
@@ -10,10 +19,5 @@ Some examples:
 1900 was not a leap year as it's not divisible by 400.
 2000 was a leap year!
 '''
-def leap_year(year):
-    leap_yr = False
-
-    if year % 4 == 0 and year % 400 == 0 or year % 100 == 0 and year % 400 == 0 or year % 4 == 0 and not year % 100 == 0:
-        leap_yr=True
-
-    return leap_yr
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/leap/canonical-data.json
