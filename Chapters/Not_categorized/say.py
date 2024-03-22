@@ -103,3 +103,10 @@ def say(number):
         final = final.rstrip()
 
     return final
+
+'''
+Instructions
+Given a number from 0 to 999,999,999,999, spell out that number in English.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/say/canonical-data.json
