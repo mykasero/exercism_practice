@@ -9,7 +9,7 @@ tens = {0: "", 2: "twenty", 3: "thirty", 4: "forty",
         5: "fifty", 6: "sixty", 7: "seventy",
         8: "eighty", 9: "ninety"}
 
-
+#function for dealing with numbers <100
 def less_100(number):
     final = ""
 
