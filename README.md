@@ -38,10 +38,10 @@ Dict_methods 3/4
 
 Sets 3/5
 
-Unpacking and multiple assignment 1/3
+Unpacking and multiple assignment 2/3
 
 Classes 3/7
 
 Generators = 1/2
 
-Not categorized = 17/x
+Not categorized = 16/x
