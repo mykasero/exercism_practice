@@ -95,3 +95,14 @@ class Queen:
             # all diagonal options checked without succes = cannot attack
             if diag == 4:
                 return False
+
+'''
+Instructions
+Given the position of two queens on a chess board, indicate whether or not they are positioned so that they can attack each other.
+
+In the game of chess, a queen can attack pieces which are on the same row, column, or diagonal.
+
+A chessboard can be represented by an 8 by 8 array.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/queen-attack/canonical-data.json
