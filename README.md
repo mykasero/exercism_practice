@@ -44,4 +44,4 @@ Classes 3/7
 
 Generators = 1/2
 
-Not categorized = 19/x
+Not categorized = 19/x  20 - look back into this solution and try to make it yourself
