@@ -1,3 +1,4 @@
+lines = ["The fourth line.", "The fifth line."]
 def transpose(lines: str) -> str:
     """Transpose a string.
 
@@ -29,3 +30,5 @@ def transpose(lines: str) -> str:
         "".join(input_matrix[y][x] for y in range(len(input_matrix)))
         for x in range(width)
     )
+
+print(transpose(lines))
