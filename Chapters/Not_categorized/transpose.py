@@ -1,34 +1,38 @@
-lines = ["The fourth line.", "The fifth line."]
-def transpose(lines: str) -> str:
-    """Transpose a string.
+def transpose(lines):
+    new_lines = []
+    transposed_word = ""
+    transposed_list = []
 
-    First, lines need to be space padded such that every line is as long, or longer,
-    than the following line. Input:
-        "1"
-        "333"
-        "22"
-    becomes:
-        "1  "
-        "333"
-        "22"
-    Next, convert each line into a list as long as the first line, padding with "",
-    to aid in matrix transposing (to avoid any IndexErrors).
-    """
-    # Input with space padding so line length never increases.
-    space_padded: list[str] = []
-    width = 0
-    for row in reversed(lines.splitlines()):
-        width = max(len(row), width)
-        space_padded.append(row.ljust(width))
-    space_padded.reverse()
-    # Build a "matrix" which is rectangular to aid in lookups.
-    input_matrix: list[list[str]] = []
-    for row in space_padded:
-        input_matrix.append(list(row) + [""] * (width - len(row)))
-    # Transpose the data which now has the same number of elements on every line.
-    return "\n".join(
-        "".join(input_matrix[y][x] for y in range(len(input_matrix)))
-        for x in range(width)
-    )
+    if len(lines) < 1:
+        return ""
+    else:
+        lines = lines.splitlines()
+        longest_str = len(max(lines, key=len))
 
-print(transpose(lines))
+        for line in lines:
+            if len(line) < longest_str:
+                line += (longest_str - len(line)) * "_"
+
+            new_lines.append(line)
+
+        for i in range(longest_str):
+            for item in new_lines:
+                transposed_word += item[i]
+
+            if i == len(lines[len(lines) - 1]) - 1:
+                lines.pop(len(lines) - 1)
+                new_lines.pop(len(lines))
+
+            if len(transposed_word) == 2 and transposed_word[1] == "_":
+
+                transposed_list.append(transposed_word.replace("_", ""))
+
+            else:
+
+                transposed_list.append(transposed_word.replace("_", " "))
+
+            transposed_word = ""
+
+        final2 = "\n".join(transposed_list).rstrip()
+
+        return final2
