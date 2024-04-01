@@ -1,8 +1,6 @@
 class BufferFullException(BufferError):
-    """Exception raised when CircularBuffer is full.
-
-    message: explanation of the error.
-
+    """
+    Exception raised when CircularBuffer is full.
     """
 
     def __init__(self, message):
@@ -10,10 +8,8 @@ class BufferFullException(BufferError):
 
 
 class BufferEmptyException(BufferError):
-    """Exception raised when CircularBuffer is empty.
-
-    message: explanation of the error.
-
+    """
+    Exception raised when CircularBuffer is empty.
     """
 
     def __init__(self, message):
@@ -22,41 +18,27 @@ class BufferEmptyException(BufferError):
 
 class CircularBuffer:
     def __init__(self, capacity):
-        self.buffer = [None] * capacity
+        self.buffer = []
+        self.capacity = capacity
 
     def read(self):
-        items = {}
-        if any(self.buffer) == False:
+        if len(self.buffer) == 0:
             raise BufferEmptyException("Circular buffer is empty")
         else:
-            for item in self.buffer:
-                if item != None:
-                    self.buffer[self.buffer.index(item)] = None
-                    return item
-                    break
+            return self.buffer.pop(0)
 
     def write(self, data):
-        if all(self.buffer) == True:
-            raise BufferFullException("Circular buffer is full")
+        if len(self.buffer) < self.capacity:
+            self.buffer.append(data)
         else:
-
-            for spot in range(len(self.buffer)):
-                if self.buffer[spot] == None:
-                    self.buffer[spot] = data
-                    break
+            raise BufferFullException("Circular buffer is full")
 
     def overwrite(self, data):
-
-        if all(self.buffer) == False:
-            for spot in range(len(self.buffer)):
-                if self.buffer[spot] == None:
-                    self.buffer[spot] = data
-                    break
-        elif all(self.buffer) == True:
-
-            self.buffer[self.buffer.index(min(self.buffer))] = data
+        if len(self.buffer) == self.capacity:
+            self.buffer.pop(0)
+            self.buffer.append(data)
+        else:
+            self.buffer.append(data)
 
     def clear(self):
-        for item in self.buffer:
-            if item != None:
-                self.buffer[self.buffer.index(item)] = None
+        self.buffer = []
