@@ -23,3 +23,14 @@ class HighScores:
                 self.top_three.pop(self.top_three.index(max(self.top_three)))
 
         return self.personal_top_three
+
+'''
+Instructions
+Manage a game player's High Score list.
+
+Your task is to build a high-score component of the classic Frogger game, 
+one of the highest selling and most addictive games of all time, and a classic of the arcade era. 
+Your task is to write methods that return the highest score from the list, the last added score and the three highest scores.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/high-scores/canonical-data.json
