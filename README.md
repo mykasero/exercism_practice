@@ -40,7 +40,7 @@ Sets 3/5
 
 Unpacking and multiple assignment 2/3
 
-Classes 4/7
+Classes 5/7
 
 Generators = 1/2
 
