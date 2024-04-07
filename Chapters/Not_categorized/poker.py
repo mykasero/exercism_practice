@@ -1,37 +1,47 @@
-hands1 = ["4D 5S 6S 8D 3C", "2S 4C 7S 9H 10H", "3S 4S 5D 6H JH"]
 def best_hands(hands):
-    straight_flush = False  # 6-10/ 7-J + same colour
-    four_kind = False  # self explanatory
-    full_house = False  # 3 * x + 2 * y
-    flush = False  # same colour
-    straight = False  # 2-6 ... J-A
-    three_kind = False  # self explanatory
-    two_pair = False  # self explanatory
-    pair = False  # self explanatory
+    hands = serialize(hands)
+    return [
+        deserialize(hand)
+        for hand in hands
+        if card_ranks(hand) == card_ranks(max(hands, key=hand_rank))
+    ]
 
-    # straight_flush > 4kind > full_house > flush > straight > 3kind > 2pair > pair > highcard
+def serialize(hands):
+    # split card into number and color tuple
+    _hands = []
+    for hand in hands:
+        _hand = []
+        for card in hand.split():
+            _hand.append((card[-2],card[-1]))  #ori bylo -2 i -1 (?)
+        _hands.append(_hand)
+    return _hands
 
-    splited_nums = []
-    splited_colors = []
+def deserialize(hand):
+    #return to original form
+    return " ".join(["".join(["10" if r == "0" else r, s]) for r, s in hand])
 
-    tmp_num = ""
-    tmp_color = ""
-    if len(hands) == 1:
-        return hands
-    else:
-        for items in hands:
-            for item in items.split():
-                tmp_num += item[0]
-                tmp_color += item[1]
+def hand_rank(hand):
+    #"return ranking of serialized hand"
+    ranks = card_ranks(hand)
+    groups = [(ranks.count(i), i) for i in set(ranks)]
+    groups.sort(reverse=True)
+    counts, number = zip(*groups)
+    straight = (len(counts) == 5) and (max(number)-min(number)==4)
+    flush = len(set([s for r, s in hand])) == 1
 
-            splited_nums.append(tmp_num)
-            splited_colors.append(tmp_color)
-            tmp_num = ""
-            tmp_color = ""
-    print(splited_nums,splited_colors)
+    return (
+        8 if straight and flush else
+        7 if counts == (4, 1) else
+        6 if counts == (3, 2) else
+        5 if flush else
+        4 if straight else
+        3 if counts == (3, 1, 1) else
+        2 if counts == (2, 2, 1) else
+        1 if counts == (2, 1, 1, 1) else
+        0, number
+    )
 
-    for numer, color in splited_nums, splited_colors:
-        print(numer, color)
-
-
-print(best_hands(hands1))
+def card_ranks(hand):
+    ranks = ["--234567890JQKA".index(r) for r, s in hand]
+    ranks.sort(reverse=True)
+    return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
