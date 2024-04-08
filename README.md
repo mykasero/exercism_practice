@@ -44,4 +44,4 @@ Classes 5/7
 
 Generators = 1/2
 
-Not categorized = 24/x 25 Work on my own iteration
+Not categorized = 24/x 25 Work on my own iteration(in progress)
