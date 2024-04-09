@@ -1,67 +1,23 @@
 def best_hands(hands):
-    hands = serialize(hands)
-    return [
-        deserialize(hand)
-        for hand in hands
-        if card_ranks(hand) == card_ranks(max(hands, key=hand_rank))
-    ]
-
-def serialize(hands):
-    # split card into number and color tuple
-    _hands = []
-    for hand in hands:
-        _hand = []
-        for card in hand.split():
-            _hand.append((card[-2],card[-1]))  #ori bylo -2 i -1 (?)
-        _hands.append(_hand)
-    return _hands
-
-def deserialize(hand):
-    #return to original form
-    return " ".join(["".join(["10" if r == "0" else r, s]) for r, s in hand])
-
-def hand_rank(hand):
-    #"return ranking of serialized hand"
-    ranks = card_ranks(hand)
-    groups = [(ranks.count(i), i) for i in set(ranks)]
-    groups.sort(reverse=True)
-    counts, number = zip(*groups)
-    straight = (len(counts) == 5) and (max(number)-min(number)==4)
-    flush = len(set([s for r, s in hand])) == 1
-
-    return (
-        8 if straight and flush else
-        7 if counts == (4, 1) else
-        6 if counts == (3, 2) else
-        5 if flush else
-        4 if straight else
-        3 if counts == (3, 1, 1) else
-        2 if counts == (2, 2, 1) else
-        1 if counts == (2, 1, 1, 1) else
-        0, number
-    )
-
-def card_ranks(hand):
-    ranks = ["--234567890JQKA".index(r) for r, s in hand]
-    ranks.sort(reverse=True)
-    return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
-
-
-'''
-My own iteration (in progress:
-
-def best_hands(hands):
     hands = split_hands(hands)
     # print(hands)
     numbers = separate_numbers(hands)
     colors = separate_colors(hands)
-    print(numbers," //// ",colors)
-    s_f = straight_flush(numbers,colors)
+
+    #s_f = straight_flush(numbers,colors)
 
     # print(numbers)
     # print(colors)
-    test1 = split_to_normal(s_f)
-    print(test1)
+    #test1 = split_to_normal(s_f)
+    #test2 = four_kind(numbers,colors)
+    #test3 = full_house(numbers,colors)
+    #test4 = flush(numbers,colors)
+    #test5 = straight(numbers,colors)
+    #test6 = three_kind(numbers,colors)
+    # test7 = two_pair(numbers,colors)
+    test8 = one_pair(numbers,colors)
+
+    print(split_to_normal(test8))
 
 
 def split_hands(hands):
@@ -78,15 +34,18 @@ def split_hands(hands):
 def split_to_normal(hands):
     normal = []
     one_card = ""
-    _ctr = 0
     _ctr2 = 0
+    final = []
+    for item in range(0, len(hands), 2):
+        while len(normal) < 5:
+            one_card = hands[item][_ctr2] + hands[item+1][_ctr2]
+            _ctr2 +=1
+            normal.append(one_card)
+        final.append(normal)
+        normal = []
+        _ctr2 = 0
 
-    while len(normal) < 5:
-        one_card = hands[_ctr][_ctr2] + hands[_ctr+1][_ctr2]
-        _ctr2 +=1
-        normal.append(one_card)
-
-    return normal
+    return final
 
 def separate_numbers(hands):
     numbers = []
@@ -110,12 +69,12 @@ def separate_colors(hands):
 
     return colors
 
+#return empty list if no straight flush
 def straight_flush(numbers,colors):
     result = False
     s_f_tmp = []
 
     final = []
-    print(numbers,colors)
     for item in numbers:
         item.sort()
     for hand in range(len(numbers)):
@@ -126,13 +85,151 @@ def straight_flush(numbers,colors):
         if len(list(set(s_f_tmp))) == 1:
             final.append(numbers[hand])
             final.append(colors[hand])
-            print(final)
             s_f_tmp = []
         else:
             s_f_tmp = []
 
     return final
 
+def four_kind(numbers,colors):
+    final = []
 
-print(best_hands(["7S 4S 5S 6S 8S", "3H 4H 5C 6C JD"]))
-'''
+    for hand in range(len(numbers)):
+        if len(list(set(numbers[hand]))) == 2:
+            final.append(numbers[hand])
+            final.append(colors[hand])
+
+    return final
+
+def full_house(numbers,colors):
+    count1 = 0
+    count2 = 0
+    final = []
+    for hand in range(len(numbers)):
+        if len(list(set(numbers[hand]))) == 2:
+            for item in numbers[hand]:
+                if item == numbers[hand][0]:
+                    count1 += 1
+                elif item == numbers[hand][len(numbers[hand])-1]:
+                    count2 += 1
+        if count1 in [3,2] and count2 in [3,2]:
+            final.append(numbers[hand])
+            final.append(colors[hand])
+
+    return final
+
+def flush(numbers,colors):
+    final = []
+    for hand in range(len(colors)):
+        if len(list(set(colors[hand]))) == 1:
+            final.append(numbers[hand])
+            final.append(colors[hand])
+
+    return final
+
+def straight(numbers,colors):
+    final = []
+
+    s_tmp = []
+
+    for item in numbers:
+        item.sort()
+
+    for hand in range(len(numbers)):
+        if len(list(set(numbers[hand]))) == 5:
+            for card in range(len(numbers[hand])-1):
+                print(int(numbers[hand][card]))
+                if int(numbers[hand][card]) == int(numbers[hand][card+1])-1:
+                    s_tmp.append("True")
+                else:
+                    s_tmp.append("False")
+
+        if len(list(set(s_tmp))) == 1 and list(set(s_tmp))[0] != "False":
+            final.append(numbers[hand])
+            final.append(colors[hand])
+            s_tmp = []
+        else:
+            s_tmp = []
+
+    return final
+
+def three_kind(numbers,colors):
+    final = []
+    _ctr1 = 0
+    _ctr2 = 0
+    _ctr3 = 0
+
+
+    for item in numbers:
+        item.sort()
+
+    for hand in range(len(numbers)):
+        if len(list(set(numbers[hand]))) == 3:
+            for card in numbers[hand]:
+                if card == numbers[hand][0]:
+                    _ctr1 += 1
+                elif card == numbers[hand][1]:
+                    _ctr2 += 1
+                elif card == numbers[hand][2]:
+                    _ctr3 += 1
+        if _ctr1 == 3 or _ctr2 == 3 or _ctr3 == 3:
+            final.append(numbers[hand])
+            final.append(colors[hand])
+            _ctr1 = _ctr2 = _ctr3 = 0
+    return final
+
+def two_pair(numbers,colors):
+    final = []
+    _ctr1 = 0
+    _ctr2 = 0
+    _ctr3 = 0
+
+
+    for item in numbers:
+        item.sort()
+
+    for hand in range(len(numbers)):
+        if len(list(set(numbers[hand]))) == 3:
+            for card in numbers[hand]:
+                if card == numbers[hand][0]:
+                    _ctr1 += 1
+                elif card == numbers[hand][1]:
+                    _ctr2 += 1
+                elif card == numbers[hand][2]:
+                    _ctr3 += 1
+        if _ctr1 == 2 and _ctr2 == 2 or _ctr2 == 2 and _ctr3 == 2 or _ctr3 == 2 and _ctr1 == 2:
+            final.append(numbers[hand])
+            final.append(colors[hand])
+            _ctr1 = _ctr2 = _ctr3 = 0
+
+    return final
+
+def one_pair(numbers,colors):
+    final = []
+    _ctr1 = 0
+    _ctr2 = 0
+    _ctr3 = 0
+    _ctr4 = 0
+
+    for item in numbers:
+        item.sort()
+
+    for hand in range(len(numbers)):
+        if len(list(set(numbers[hand]))) == 4:
+            for card in numbers[hand]:
+                if card == numbers[hand][0]:
+                    _ctr1 += 1
+                elif card == numbers[hand][1]:
+                    _ctr2 += 1
+                elif card == numbers[hand][2]:
+                    _ctr3 += 1
+                elif card == numbers[hand][3]:
+                    _ctr4 += 1
+        if _ctr1 == 2 or _ctr2 == 2 or _ctr3 == 2 or _ctr4 == 2:
+            final.append(numbers[hand])
+            final.append(colors[hand])
+            _ctr1 = _ctr2 = _ctr3 = _ctr4 = 0
+
+    return final
+
+print(best_hands(["7S 7S 4S 3S 8H", "5C 4C 5C 6C 5C"]))
