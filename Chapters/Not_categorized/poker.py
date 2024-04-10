@@ -1,24 +1,60 @@
+values = {"J" : 12, "Q" : 13, "K" : 14, "A" : 15}
+
+'''
+Notes:
+
+Remake functions to return indexes instead of the lists so you can pull the return value from the OG list
+
+Apply working with J,Q,K,A values
+
+
+'''
+
 def best_hands(hands):
-    hands = split_hands(hands)
-    # print(hands)
-    numbers = separate_numbers(hands)
-    colors = separate_colors(hands)
+    final = []
 
-    #s_f = straight_flush(numbers,colors)
+    new_hands = hands.copy()
+    new_hands = split_hands(hands)
 
-    # print(numbers)
-    # print(colors)
-    #test1 = split_to_normal(s_f)
-    #test2 = four_kind(numbers,colors)
-    #test3 = full_house(numbers,colors)
-    #test4 = flush(numbers,colors)
-    #test5 = straight(numbers,colors)
-    #test6 = three_kind(numbers,colors)
-    # test7 = two_pair(numbers,colors)
-    test8 = one_pair(numbers,colors)
+    numbers = separate_numbers(new_hands)
+    colors = separate_colors(new_hands)
 
-    print(split_to_normal(test8))
+    _val_ctr = 0
+    _vals = []
+    _card = ""
+    _hands = ""
 
+    if len(split_to_normal(straight_flush(numbers,colors))) > 0:
+        for cards in split_to_normal(straight_flush(numbers,colors)):
+            final.append(cards)
+    elif len(split_to_normal(four_kind(numbers,colors))) > 0:
+        for cards in split_to_normal(four_kind(numbers,colors)):
+            final.append(cards)
+    elif len(split_to_normal(full_house(numbers,colors))) > 0:
+        for cards in split_to_normal(full_house(numbers,colors)):
+            final.append(cards)
+    elif len(split_to_normal(straight(numbers,colors))) > 0:
+        for cards in split_to_normal(straight(numbers,colors)):
+            final.append(cards)
+    elif len(split_to_normal(three_kind(numbers,colors))) > 0:
+        for cards in split_to_normal(three_kind(numbers,colors)):
+            final.append(cards)
+    elif len(split_to_normal(two_pair(numbers,colors))) > 0:
+        for cards in split_to_normal(two_pair(numbers,colors)):
+            final.append(cards)
+    elif len(split_to_normal(one_pair(numbers,colors))) > 0:
+        for cards in split_to_normal(one_pair(numbers,colors)):
+            final.append(cards)
+    else:
+        for hand in new_hands:
+            for card in hand:
+                _val_ctr += int(card[0])
+            _vals.append(_val_ctr)
+            _val_ctr = 0
+
+        final = [hands[_vals.index(max(_vals))]]
+
+    return final
 
 def split_hands(hands):
     splited_hands = []
@@ -138,7 +174,6 @@ def straight(numbers,colors):
     for hand in range(len(numbers)):
         if len(list(set(numbers[hand]))) == 5:
             for card in range(len(numbers[hand])-1):
-                print(int(numbers[hand][card]))
                 if int(numbers[hand][card]) == int(numbers[hand][card+1])-1:
                     s_tmp.append("True")
                 else:
@@ -232,4 +267,4 @@ def one_pair(numbers,colors):
 
     return final
 
-print(best_hands(["7S 7S 4S 3S 8H", "5C 4C 5C 6C 5C"]))
+print(best_hands(["5S 3S 2S 8S 11H", "5H 4C 8C JC JC"]))
