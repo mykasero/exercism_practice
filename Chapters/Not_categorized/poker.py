@@ -35,8 +35,10 @@ def best_hands(hands):
     _vals = []
     _card = ""
     _hands = ""
-
-    if len(split_to_normal(straight_flush(numbers,colors))) > 0:
+    _highest_val = "0"
+    if len(new_hands) == 1:
+        final = hands
+    elif len(split_to_normal(straight_flush(numbers,colors))) > 0:
         print("straight_flush")
         for cards in split_to_normal(straight_flush(numbers,colors)):
             final.append(cards)
@@ -65,21 +67,27 @@ def best_hands(hands):
         for cards in split_to_normal(one_pair(numbers,colors)):
             final.append(cards)
     else:
-        print("high card")
-
-        # needs rework, its not about highest score but about highest card
         for hand in new_hands:
             for card in hand:
                 # print(card)
                 if len(card) > 2:
-                    _val_ctr += int(card[0])*10 + int(card[1])
+                    if len(_highest_val) > 2:
+                        if int(card[0])*10 + int(card[1]) > int(_highest_val[0]) * 10 + int(_highest_val[1]):
+                            _highest_val = card
+                    else:
+                        if int(card[0]) * 10 + int(card[1]) > int(_highest_val[0]):
+                            _highest_val = card
                 else:
-                    _val_ctr += int(card[0])
-            _vals.append(_val_ctr)
-            _val_ctr = 0
+                    if len(_highest_val) > 2:
+                        if int(card[0]) > int(_highest_val[0]) * 10 + int(_highest_val[1]):
+                            _highest_val = card
+                    else:
+                        if int(card[0]) > int(_highest_val[0]):
+                            _highest_val = card
+        for i in range(len(new_hands)):
+            if _highest_val in new_hands[i]:
+                final = [hands[i]]
 
-        final = [hands[_vals.index(max(_vals))]]
-    print(final)
     return final
 
 def split_hands(hands):
@@ -328,5 +336,3 @@ def one_pair(numbers,colors):
             _ctr1 = _ctr2 = _ctr3 = _ctr4 = 0
 
     return final
-
-print(best_hands(["4D 5S 6S 8D 3C", "2S 4C 7S 9H 10H", "3S 4S 5D 6H JH"]))
