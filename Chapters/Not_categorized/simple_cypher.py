@@ -1,8 +1,6 @@
 import random
 import string
-
-LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
-           "w", "x", "y", "z"]
+LETTERS = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 
 class Cipher:
@@ -10,10 +8,11 @@ class Cipher:
         self.key = ""
 
         if key == None:
-            self.key = ''.join(random.choices(string.ascii_lowercase, k=100))
+            self.key = ''.join(random.choices(string.ascii_lowercase, k = 100))
         else:
             self.key = key
 
+     #all encode passed      
     def encode(self, text):
 
         _ctr = 0
@@ -25,11 +24,14 @@ class Cipher:
                     _ctr += 1
                 else:
                     _ctr = 0
-
+                    
         new_text = ""
-
+        
         for item in range(len(text)):
-            new_text += LETTERS[LETTERS.index(self.key[item]) + LETTERS.index(text[item])]
+            if (LETTERS.index(self.key[item]) + LETTERS.index(text[item])) > 25:
+                new_text += LETTERS[(LETTERS.index(self.key[item])+LETTERS.index(text[item]))-26]
+            else:
+                new_text += LETTERS[LETTERS.index(self.key[item])+LETTERS.index(text[item])]
 
         return new_text
 
@@ -37,6 +39,6 @@ class Cipher:
 
         decoded = ""
         for item in range(len(text)):
-            decoded += LETTERS[(LETTERS.index(self.key[item]) - LETTERS.index(text[item])) % 26]
+            decoded += LETTERS[(LETTERS.index(self.key[item]) - LETTERS.index(text[item]))%26]
 
         return decoded
