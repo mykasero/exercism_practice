@@ -44,5 +44,5 @@ Classes 5/7
 
 Generators = 1/2
 
-Not categorized = 25/x 26 In progress
+Not categorized = 26/x
 Come back to poker task one day again
