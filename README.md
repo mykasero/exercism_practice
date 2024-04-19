@@ -1,3 +1,5 @@
+/Readme needs better visual rep
+
 PYTHON ROADMAP
 
 Every exercise has a description pasted under the code and the link to the test cases.
