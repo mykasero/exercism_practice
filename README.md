@@ -8,9 +8,9 @@ Image representation of the chapters
 
 ![image](https://github.com/mykasero/excercism_practice/assets/58263528/fc1bb765-1012-44b2-a2f6-67266a0a1f6a)
 
-(![image](https://github.com/mykasero/excercism_practice/assets/58263528/0fafa47e-d4f9-412a-a5df-bd9c628f074e)
+![image](https://github.com/mykasero/excercism_practice/assets/58263528/fd90c642-e8c3-4ea4-bced-3a4fabdc6253)
 
-![image](https://github.com/mykasero/excercism_practice/assets/58263528/705ef47f-2093-4b8b-b39f-8ded8abdd800)
+![image](https://github.com/mykasero/excercism_practice/assets/58263528/9aabc100-cf1b-488a-9201-c1df159b4dab)
 
 Chapters completed:
 
