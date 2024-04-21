@@ -140,3 +140,17 @@ class Clock:
                 final = str(hrs) + ":" + str(mins)
 
         return final
+
+'''
+nstructions
+Implement a clock that handles times without dates.
+
+You should be able to add and subtract minutes to it.
+
+Two clocks that represent the same time should be equal to each other.
+
+The tests for this exercise expect your clock will be implemented via a Clock class in Python. 
+If you are unfamiliar with classes in Python, classes from the Python docs is a good place to start.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/clock/canonical-data.json
