@@ -1,3 +1,5 @@
+#Needs a re-do, prob best to split into separate functions
+
 def rectangles(strings):
     final = 0
 
@@ -40,6 +42,3 @@ def rectangles(strings):
 
     return final
 
-text1 = ["  +-+", "  | |", "+-+-+", "| |  ", "+-+"]
-
-print(rectangles(text1))
