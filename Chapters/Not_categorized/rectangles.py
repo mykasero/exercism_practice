@@ -16,3 +16,17 @@ def rectangles(s):
                     elif s[yi][x] != "|":
                         break
     return rects
+
+'''
+Instructions
+Count the rectangles in an ASCII diagram like the one below.
+
+   +--+
+  ++  |
++-++--+
+|  |  |
++--+--+
+The above diagram contains 6 rectangles
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/rectangles/canonical-data.json
