@@ -52,3 +52,9 @@ def BuildTree(records):
     if len(trees) > 0:
         root = trees[0]
     return root
+
+'''
+Instructions
+Refactor a tree building algorithm.
+'''
+#test link unavailable
