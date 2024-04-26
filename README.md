@@ -50,6 +50,6 @@ Classes 5/7
 
 Generators = 1/2
 
-Not categorized = 30/x 31 In progress - Raising valuerrors is done, but needs a tweak
+Not categorized = 31/x
 
 #Come back to poker task one day again
