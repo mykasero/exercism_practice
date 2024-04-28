@@ -1,4 +1,4 @@
-# STATUS :  5 Passed / 10 Failed
+# STATUS :  10 Passed / 5 Failed
 
 def annotate(minefield):
     # Function body starts here
@@ -19,7 +19,7 @@ def annotate(minefield):
         return []
     elif minefield[0] == "":
         return [""]
-    elif all(same):
+    elif all(same) and len(minefield[0]) > 1:
         return minefield
     else:
         '''
@@ -34,50 +34,91 @@ def annotate(minefield):
 
         for i in range(len(minefield)):
             for j in range(len(minefield[i])):
-                #if minefield[i][j] != "*":
-                if i < len(minefield)-1:
+                if minefield[i][j] != "*":
+                    if len(minefield) == 1:
+                        if j < len(minefield[0])-1:
+                            if minefield[0][j+1] == "*": #check right
+                                number += 1
+                        if j > 0:
+                            if minefield[0][j-1] == "*": #check left
+                                number += 1
+                        if 0 < j < len(minefield[0]) - 1:
+                            if minefield[0][j - 1] == " " and minefield[0][j + 1] == " ":
+                                number = 99
+                    elif len(minefield) > 1 and len(minefield[0]) == 1:
+                        if i < len(minefield)-1:
+                            if minefield[i+1][0] == "*":
+                                number += 1 # check below
+                        if i > 0:
+                            if minefield[i-1][0] == "*": # check above
+                                number += 1
+                        if 0 < i < len(minefield) - 1:
+                            if minefield[i-1][0] == " " and minefield[i+1][0] == " ":
+                                number = 99
 
-                    if minefield[i + 1][j] == "*":  # check below
-                        number += 1
-                    if j < len(minefield[i])-1:
-                        if minefield[i][j + 1] == "*":  # check right
-                            number += 1
-                        if minefield[i+1][j+1] == "*": #check bot right
-                            number += 1
-                    if j > 0:
-                        if minefield[i+1][j-1] == "*": #check bot left
-                            number += 1
+                    else:
+                        if i < len(minefield)-1:
 
-                if i > 0:
-                    if minefield[i - 1][j] == "*":  # check above
-                        number += 1
+                            if minefield[i + 1][j] == "*":  # check below
+                                number += 1
+                            if j < len(minefield[i])-1:
+                                if minefield[i][j + 1] == "*":  # check right
+                                    number += 1
+                                if minefield[i+1][j+1] == "*": #check bot right
+                                    number += 1
+                            if j > 0:
+                                if minefield[i+1][j-1] == "*": #check bot left
+                                    number += 1
 
-                    if j > 0:
-                        if minefield[i-1][j-1] == "*": #check top left
-                            number += 1
+                        if i > 0:
+                            if minefield[i - 1][j] == "*":  # check above
+                                number += 1
 
-                    if j < len(minefield[i])-1:
-                        if minefield[i-1][j+1] == "*": #check top right
-                            number += 1
+                            if j > 0:
+                                if minefield[i-1][j-1] == "*": #check top left
+                                    number += 1
 
-                if j > 0:
-                    if minefield [i][j-1] == "*": #check left
-                        number += 1
+                            if j < len(minefield[i])-1:
+                                if minefield[i-1][j+1] == "*": #check top right
+                                    number += 1
 
-                numbers += str(number)
-                number = 0
+                        if j > 0:
+                            if minefield [i][j-1] == "*": #check left
+                                number += 1
 
-                # else:
-                #     pass
+
+
+                    if number > 0:
+                        if number == 99:
+                            numbers += " "
+                            number = 0
+                        else:
+                            numbers += str(number)
+                            number = 0
+                    else:
+                        number = 0
+                        numbers += str(number)
+                else:
+                    numbers += "0"
             if i == len(minefield)-1:
                 final_str += numbers
             else:
-                final_str += numbers + " "
+                if len(minefield[0]) == 1:
+                    final_str += numbers
+                else:
+                 final_str += numbers + " "
+
             #final_field.append(numbers)
             numbers = ""
 
 
     final_str = final_str.replace("0","*")
-    final_field = final_str.split()
+    if len(minefield) == 1:
+        final_field.append(final_str)
+    elif len(minefield) > 1 and len(minefield[0]) == 1:
+        for item in final_str:
+            final_field.append(item)
+    else:
+        final_field = final_str.split()
 
     return final_field
