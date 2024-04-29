@@ -1,5 +1,3 @@
-# STATUS :  15/0
-
 def annotate(minefield):
     # Function body starts here
     final_str = ""
@@ -205,3 +203,29 @@ def annotate(minefield):
                 final_field[item] = final_field[item].replace("C"," ")
 
     return final_field
+
+
+'''
+Introduction
+Minesweeper is a popular game where the user has to find the mines using numeric hints that indicate how many mines are directly adjacent (horizontally, vertically, diagonally) to a square.
+
+Instructions
+Your task is to add the mine counts to empty squares in a completed Minesweeper board. The board itself is a rectangle composed of squares that are either empty (' ') or a mine ('*').
+
+For each empty square, count the number of mines adjacent to it (horizontally, vertically, diagonally). If the empty square has no adjacent mines, leave it empty. Otherwise replace it with the adjacent mines count.
+
+For example, you may receive a 5 x 4 board like this (empty spaces are represented here with the '·' character for display on screen):
+
+·*·*·
+··*··
+··*··
+·····
+Which your code should transform into this:
+
+1*3*1
+13*31
+·2*2·
+·111·
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/minesweeper/canonical-data.json
