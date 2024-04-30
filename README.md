@@ -30,7 +30,7 @@ String_Methods 4/4
 
 Comparisions 5/5  (1 Medium)
 
-Lists 5/6 (1 Medium) 6 in progress
+Lists 6/6 (2 Medium)
 
 List_methods 6/7
 
