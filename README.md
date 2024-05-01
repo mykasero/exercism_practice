@@ -32,7 +32,7 @@ Comparisions 5/5  (1 Medium)
 
 Lists 6/6 (2 Medium)
 
-List_methods 6/7
+List_methods 6/7 7 In progress
 
 Loops 5/6 
 
