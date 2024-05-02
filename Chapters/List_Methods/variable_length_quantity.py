@@ -1,6 +1,3 @@
-'''
-    Conversion is wrong. Should iterate down from the number and number % 2 > 0 new val = number%2 then add 1, else if number % 2 == 0 add 0
-'''
 def byte_count(numbers):
     bytes = []
     for item in numbers:
@@ -21,19 +18,59 @@ def dec_to_bin(numbers):
     byte = ""
     splitted = []
     val = 0
-    for ctr in range(len(bytes)):
-        for i in range(bytes[ctr]*8):
-
-            val += (2**i)
-
-            if val <= numbers[ctr]:
-                byte += "1"
-            elif val > numbers[ctr]:
-                byte += "0"
+    new_num = numbers.copy()
+    for i in range(len(numbers)):
+        while new_num[i] > 1:
+            remainder = int(new_num[i] % 2)
+            byte += str(remainder)
+            new_num[i] = int(new_num[i] / 2)
 
             if len(byte) == 8:
                 splitted.append(byte)
                 byte = ""
+
+            if new_num[i] == 1:
+                if len(byte) < 8:
+                    byte += (7 - len(byte)) * "0" + "1"
+                    splitted.append(byte)
+                    byte = ""
+                    break
+                elif len(byte) == 8:
+                    splitted.append(byte)
+                    byte = ""
+                    break
+        # for i in range(len(splitted)):
+        #     splitted[i] = splitted[i][::-1]
+
+        splitted = splitted[::-1]
+        if bytes[i] > 1: # A - it's not the last octet
+            splitted[0] = "1" + splitted[0][1:]
+
+            if numbers[i] > 0 and len(splitted) > 1:
+                splitted[0] = splitted[0][0] + "1" + splitted[0][2:]
+
+            # if len(splitted) == 1:
+            #     splitted.append("00000000")
+
+
+        if bytes[i] > 1 and len(splitted) == 1:
+            splitted.append("00000000")
+
+
+
+    # for ctr in range(len(bytes)):
+    #     for i in range(bytes[ctr]*8):
+    #
+    #         val += (2**i)
+    #
+    #         if val <= numbers[ctr]:
+    #             byte += "1"
+    #         elif val > numbers[ctr]:
+    #             byte += "0"
+    #
+    #         if len(byte) == 8:
+    #             splitted.append(byte)
+    #             byte = ""
 
     # splitted = splitted[::-1]
     # for i in range(len(splitted)):
@@ -47,8 +84,12 @@ def dec_to_bin(numbers):
 def bin_to_dec(bins):
     numbers = []
     val = 0
+    results = bins.copy()
 
-    for item in bins:
+    for i in range(len(results)):
+        results[i] = results[i][::-1]
+
+    for item in results:
         for j in range(len(item)):
             if item[j] == "1":
                 val += (2**j)
@@ -58,9 +99,15 @@ def bin_to_dec(bins):
     stop2 = "STOP"
     return numbers
 def encode(numbers):
-    nums = dec_to_bin(numbers)
-    if nums == []:
+    nums = []
+    if numbers == [0]:
         return [0]
+    else:
+        for item in numbers:
+            if item < 128:
+                nums.append(item)
+            else:
+                nums = dec_to_bin(numbers)
 
 
     return nums
