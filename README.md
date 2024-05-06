@@ -35,7 +35,7 @@ Lists 6/6 (2 Medium)
 List_methods 7/7
 Come back to VLQ some time later
 
-Loops 5/6 6 In progress( medium)
+Loops 6/6 6 (1 Medium) # Need to study itertools more
 
 Tuples 3/6
 
