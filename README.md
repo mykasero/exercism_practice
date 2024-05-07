@@ -51,6 +51,6 @@ Classes 5/7
 
 Generators = 1/2
 
-Not categorized = 32/x 
+Not categorized = 33/x (1 Medium)
 
 #Come back to poker task one day again
