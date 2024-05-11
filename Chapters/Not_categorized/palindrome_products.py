@@ -1,9 +1,19 @@
 from itertools import combinations_with_replacement
 
-def palindromes(min_num, max_num):
+def palindromes(min_num, max_num, s_l):
+    if s_l == "S" and min_num + 100 < max_num:
+        max_num = min_num + 100
+    elif s_l == "L" and min_num + 100 < max_num:
+        min_num = max_num - 100
+
+
+
     products = []
     values = []
     combos = combinations_with_replacement([str(item) for item in range(min_num,max_num+1)], 2)
+
+
+
 
     for item in combos:
         value = int(item[0]) * int(item[1])
@@ -42,10 +52,25 @@ def largest(min_factor, max_factor):
     :return: tuple of (palindrome, iterable).
              Iterable should contain both factors of the palindrome in an arbitrary order.
     """
+    if min_factor > max_factor:
+        raise ValueError("min must be <= max")
+    else:
+        numbers, values = palindromes(min_factor,max_factor,"L")
+        nums = []
 
-    numbers, values = palindromes(min_factor,max_factor)
+        for item in numbers:
+            if int(item[0])*int(item[1]) == max(values):
 
-    final = (max(values), [numbers[values.index(max(values))]])
+                nums.append([int(item[0]),int(item[1])])
+
+        # for item in numbers[values.index(max(values))]:
+        #     nums.append(item)
+
+        if numbers == [] or values == []:
+            return (None,[])
+        else:
+            final = (max(values),nums)
+
 
     STOP1 = "s"
     return final
@@ -61,9 +86,20 @@ def smallest(min_factor, max_factor):
     Iterable should contain both factors of the palindrome in an arbitrary order.
     """
 
-    numbers, values = palindromes(min_factor, max_factor)
+    numbers, values = palindromes(min_factor, max_factor,"S")
+    pair = []
+    if min_factor > max_factor:
+        raise ValueError("min must be <= max")
+    else:
+        if numbers == [] or values == []:
+            return (None,[])
+        else:
+            for item in numbers[values.index(min(values))]:
+                pair.append(int(item))
 
-    final = (min(values), [list(set(numbers[values.index(min(values))]))])
+            final = tuple((min(values), [pair]))
+
+
 
     TEST = "STOP"
 
