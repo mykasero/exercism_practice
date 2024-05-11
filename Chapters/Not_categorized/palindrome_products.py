@@ -1,45 +1,49 @@
 from itertools import combinations_with_replacement
 
 def palindromes(min_num, max_num, s_l):
-    if s_l == "S" and min_num + 100 < max_num:
+    if s_l == "S" and min_num + 100 < max_num and min_num < 2000:
         max_num = min_num + 100
-    elif s_l == "L" and min_num + 100 < max_num:
+    elif s_l == "L" and min_num + 100 < max_num and min_num < 2000:
         min_num = max_num - 100
-
-
 
     products = []
     values = []
     combos = combinations_with_replacement([str(item) for item in range(min_num,max_num+1)], 2)
 
-
-
+    first_half = ""
+    second_half = ""
 
     for item in combos:
         value = int(item[0]) * int(item[1])
         str_val = str(value)
         len1 = len(str_val)
-        if len(str_val) % 2 == 0:
-            #print( sorted(sorted(str_val[:len1 - int(len1/2)]), " ||| ", str_val[len1-(int((len1/2))) : len1]))
-            if sorted(str_val[:len1 - int(len1/2)]) == \
-                    sorted(str_val[len1 - (int((len1 / 2))): len1]):
 
-                products.append([int(item[0]), int(item[1])])
-                # products.append(item)
+        if len(str_val) % 2 == 0:
+            for i in range(int(len(str_val)/2)):
+                first_half += str_val[i]
+            for j in range(len(str_val)-1, int(len(str_val)/2)-1, -1):
+                second_half += str_val[j]
+
+            if first_half == second_half:
+                products.append([int(item[0]),int(item[1])])
                 values.append(value)
                 value = 0
+
+            first_half = second_half = ""
 
         elif len1 % 2 == 1:
-            # int(len1/2) = half-1, so for the 2nd half just int(len1/2)+2
-            #print(sorted(str_val[:int(len1/2)]), " ||| ", sorted(str_val[int(len1/2)+1:len1]))
-            if sorted(str_val[:int(len1/2)]) == sorted(str_val[int(len1/2)+1:len1]):
-                products.append(item)
+
+            for i in range(int(len(str_val)/2)):
+                first_half += str_val[i]
+            for j in range(len(str_val)-1,int(len(str_val)/2),-1):
+                second_half += str_val[j]
+
+            if first_half == second_half:
+                products.append([int(item[0]),int(item[1])])
                 values.append(value)
                 value = 0
 
-    TEST = "STOP"
-
-
+            first_half = second_half = ""
 
     return products, values
 
@@ -63,16 +67,11 @@ def largest(min_factor, max_factor):
 
                 nums.append([int(item[0]),int(item[1])])
 
-        # for item in numbers[values.index(max(values))]:
-        #     nums.append(item)
-
         if numbers == [] or values == []:
             return (None,[])
         else:
             final = (max(values),nums)
 
-
-    STOP1 = "s"
     return final
 
 
@@ -98,9 +97,5 @@ def smallest(min_factor, max_factor):
                 pair.append(int(item))
 
             final = tuple((min(values), [pair]))
-
-
-
-    TEST = "STOP"
 
     return final
