@@ -1,7 +1,6 @@
 #STATUS 8/12
 
 # 31st is the place of the first |
-
 def tally(rows):
     line_zero = "Team" + 27*" " + "| MP |  W |  D |  L |  P"
     results = []
@@ -12,17 +11,20 @@ def tally(rows):
     points = 0
 
     txt_stats = "|"
+
     final = []
+
     final.append(line_zero)
 
 
     if len(rows) == 0:
         return [line_zero]
     else:
+        # turn into list
         for item in rows:
             results.append(item.split(";"))
 
-
+        #count the stats MP,W,D,L
         for result in results:
             if result[2] == "win":
                 #MP
@@ -56,6 +58,7 @@ def tally(rows):
                 teams[result[0]][3] += 1
 
 
+        #count points
         for team, stats in teams.items():
             for i in range(1,3):
                 if i == 1:
@@ -65,27 +68,40 @@ def tally(rows):
             teams[team][4] = points
             points = 0
 
-        #sort dict based by pts
-        # teams1 = dict(sorted(teams.items(), key = lambda item: item[1][4], reverse = True))
-        # needs more work /\
+        #remove teams that haven't played
+        ctr = 0
+        teams_k = [item for item in teams.keys()]
+        teams_v = [item for item in teams.values()]
+        while True:
+            if set(teams_v[ctr]) == {0}:
+                del teams[teams_k[ctr]]
 
-        for team, stats in teams.items():
-            if set(stats) != {0}:
-                for i in range(len(stats)):
-                    if i == len(stats)-1:
-                        txt_stats += "  " + str(stats[i])
+            ctr += 1
+            if ctr == 4:
+                break
+
+        #sort the teams desc by points
+        teams1 = dict(sorted(teams.items(), key=lambda item: item[1][4], reverse=True))
+
+        #prepare final result
+        for team, stats in teams1.items():
+            for i in range(len(stats)):
+                if i == len(stats)-1:
+                    if stats[i] > 9:
+                        txt_stats += " " + str(stats[i])
                     else:
-                        if stats[i] > 9:
-                            txt_stats += " " + str(stats[i]) + " |"
-                        else:
-                            txt_stats += "  " + str(stats[i]) + " |"
+                        txt_stats += "  " + str(stats[i])
+                else:
+                    if stats[i] > 9:
+                        txt_stats += " " + str(stats[i]) + " |"
+                    else:
+                        txt_stats += "  " + str(stats[i]) + " |"
 
 
-                txt = team + (31 - len(team)) * ' ' + txt_stats
-                final.append(txt)
+            txt = team + (31 - len(team)) * ' ' + txt_stats
+            final.append(txt)
             txt = ""
             txt_stats = "|"
 
-    STOP = "STOP"
 
     return final
