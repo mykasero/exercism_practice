@@ -37,7 +37,7 @@ Come back to VLQ some time later
 
 Loops 6/6 6 (1 Medium) # Need to study itertools more
 
-Tuples 4/6 4 (1 Medium )
+Tuples 5/6 4 (2 Medium )
 
 Dictionaries 4/5
 
