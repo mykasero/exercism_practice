@@ -7,7 +7,7 @@ Every exercise has a description pasted under the code and the link to the test 
 Image representation of the chapters 
 <p align = "center">
   
-<img src="https://github.com/mykasero/excercism_practice/assets/58263528/fc1bb765-1012-44b2-a2f6-67266a0a1f6a"/>
+<img src="![image](https://github.com/mykasero/excercism_practice/assets/58263528/a11f2895-a78c-40fa-a0c7-43000294de9e)"/>
 
 <img src="https://github.com/mykasero/excercism_practice/assets/58263528/fd90c642-e8c3-4ea4-bced-3a4fabdc6253"/>
 
