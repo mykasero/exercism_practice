@@ -119,3 +119,10 @@ def parse(markdown):
             final = "<p>" + final.rstrip() + "</p>"
 
     return final
+
+'''
+Instructions
+Refactor a Markdown parser.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/markdown/canonical-data.json
