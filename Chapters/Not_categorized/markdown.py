@@ -58,13 +58,64 @@ def parse(markdown):
             final = "<p>" + markdown + "</p>"
 
     else:
-        for item in splitted:
-            if re.match(".*\*.*", item):
-                _strip += "<ul>"
-                _strip += "<li>" + item.replace("*", "").strip() + "</li>"
+        for i in range(len(splitted)):
+            if len(splitted[i]) > 1:
+                if re.match(".*\*.*", splitted[i]):
+                    if not re.search("<ul>",final):
+                        _strip += "<ul>"
 
-                final += "</ul>"
+                    if re.search("__",splitted[i]):
+                        _strip += "<li><strong>" + splitted[i].replace("__", "").replace("*","").strip() + "</strong></li>"
 
-    stop = "STOP"
+                    elif re.search("_",splitted[i]):
+                        if splitted[i].index("*") == 0 and splitted[i].count("*") == 1:
+                            _strip += "<li><em>" + splitted[i].replace("_", "").replace("*","").strip() + "</em></li>"
+                        else:
+                            _strip += "<li><em>" + splitted[i][1:].replace("_", "").replace("*","").strip() + "</em></li>"
+
+                    else:
+                        if splitted[i].index("*") == 0 and splitted[i].count("*") == 1:
+                            _strip += "<li>" + splitted[i].replace("*", "").strip() + "</li>"
+                        else:
+                            _strip += "<li>" + splitted[i][1:].strip() + "</li>"
+
+                elif re.match("#",splitted[i]):
+                    _strip += "<h1>" + splitted[i].replace("#","").strip() + "</h1>"
+
+                elif re.match("__",splitted[i]):
+                    _strip += "<strong>" + splitted[i].replace("__", "").strip() + "</strong>"
+
+                elif re.match("_",splitted[i]):
+                    _strip += "<em>" + splitted[i].replace("_","").strip() + "</em> "
+
+                else:
+                    if i == 0 and not re.match(".*\*.*",splitted[i]) and not re.match("#",splitted[i]):
+                        _strip += "<p>" + splitted[i] + " "
+
+                    elif re.search("<ul>",final) and not re.match(".*\*.*",splitted[i]) and not re.match("#",splitted[i]):
+                        _strip += "</ul><p>" + splitted[i].strip() + "</p>"
+
+                    else:
+                        _strip += splitted[i] + " "
+            else:
+                if i > 0:
+                    _strip += splitted[i] + " "
+
+                if i == 0 and len(splitted[i]) == 1:
+                    _strip += "<h1>"
+
+            final += _strip
+            _strip = ""
+
+        if re.search("<ul>",final) and not re.search("</ul>",final):
+            final += "</ul>"
+        if re.search("<h1>",final) and not re.search("</h1>",final):
+            final = final.rstrip()
+            final += "</h1>"
+        if re.search("<p>",final) and not re.search("</p>",final):
+            final = final.rstrip()
+            final += "</p>"
+        if not re.search("<h1>",final) and not re.search("<ul>",final) and not re.search("<p>",final):
+            final = "<p>" + final.rstrip() + "</p>"
 
     return final
