@@ -41,7 +41,7 @@ Tuples 5/6 4 (2 Medium )
 
 Dictionaries 4/5
 
-Dict_methods 3/4
+Dict_methods 4/4 (1 Medium)
 
 Sets 3/5
 
