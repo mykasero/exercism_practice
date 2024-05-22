@@ -40,6 +40,21 @@ def rows(row_count):
     #
     # return final[:row_count]
 
+'''
+nstructions
+Compute Pascal's triangle up to a given number of rows.
 
+In Pascal's Triangle each number is computed by adding the numbers to the right and left of the current position in the previous row.
 
+    1
+   1 1
+  1 2 1
+ 1 3 3 1
+1 4 6 4 1
+# ... etc
+
+This exercise is designed to be completed using recursion, rather than loops.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/pascals-triangle/canonical-data.json
 
