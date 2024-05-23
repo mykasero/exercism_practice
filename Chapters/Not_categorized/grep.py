@@ -1,3 +1,7 @@
+#Current status 12 passed / 13 failed
+
+#maybe split the flag actions into separate functions for the multiple flags case?
+
 import re
 
 FILE_TEXT = {
