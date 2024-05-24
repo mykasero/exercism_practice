@@ -1,7 +1,4 @@
-#Current status 12 passed / 13 failed
-
-#maybe split the flag actions into separate functions for the multiple flags case?
-
+#STATUS 15 passed / 10 failed
 import re
 
 FILE_TEXT = {
@@ -50,61 +47,70 @@ def grep(pattern, flags, files):
 
     final = ""
 
+    flag_list = flags.split()
+
+    # working on 1 file
+    # STATUS - all passed
+
+    if len(flag_list) == 0:
+        flag_list.append("")
+
     if len(files) == 1:
         text1 = FILE_TEXT[files[0]].split("\n")
-
-        if flags == "":
-            for item in text1:
-                if item.find(pattern) > 0:
-                    index1 = text1.index(item)
-                    final += text1[index1] + "\n"
-
-        elif flags == "-n":
-            for i in range(len(text1)):
-                if text1[i].find(pattern) > 0:
-                    index1 = text1.index(text1[i])
-                    line_num = i+1
-                    final += str(line_num) + ":" + text1[index1] + "\n"
-
-        elif flags == "-l":
-            keys = list(FILE_TEXT.keys())
-            index = keys.index(files[0])
-            final = keys[index] + "\n"
-
-        elif flags == "-x":
-            for item in text1:
-                # test1 = item.find(pattern)
-                # x = re.search(pattern, item)
-                if re.search(pattern, item) and len(pattern) == len(item):
-                    index1 = text1.index(item)
-                    final += text1[index1] + "\n"
-
-        elif flags == "-i":
-            pattern = pattern.lower()
-            for item in text1:
-                if re.search(pattern.lower(), item.lower()):
-                    index1 = text1.index(item)
-                    final += text1[index1] + "\n"
-
-        elif flags == "-v":
-            for item in text1:
-                if not re.search(pattern,item):
-                    index1 = text1.index(item)
-                    if index1 == len(text1)-1:
-                        final += text1[index1]
-                    else:
+        for flag in flag_list:
+            if flag == "":
+                for item in text1:
+                    if item.find(pattern) > 0:
+                        index1 = text1.index(item)
                         final += text1[index1] + "\n"
 
+            if flag == "-n":
+                for i in range(len(text1)):
+                    line_num = i + 1
 
-    elif len(files) == 2:
-        text1 = FILE_TEXT[files[0]]
-        text2 = FILE_TEXT[files[1]]
+                    if re.search(pattern.lower(), text1[i].lower()):
+                        index1 = text1.index(text1[i])
+                        if len(flag_list) > 1:
+                            final += str(line_num) + ":"
+                        else:
+                            final += str(line_num) + ":" + text1[index1] + "\n"
+
+            if flag == "-l":
+                keys = list(FILE_TEXT.keys())
+                index = keys.index(files[0])
+                for item in text1:
+                    if re.search(pattern.lower(),item.lower()):
+                        final = keys[index] + "\n"
+
+            if flag == "-x":
+                for item in text1:
+                    if re.search(pattern, item) and len(pattern) == len(item):
+                        index1 = text1.index(item)
+                        final += text1[index1] + "\n"
+
+            if flag == "-i":
+                pattern = pattern.lower()
+                for item in text1:
+                    if re.search(pattern.lower(), item.lower()):
+                        index1 = text1.index(item)
+                        final += text1[index1] + "\n"
+
+            if flag == "-v":
+                final = ""
+                for item in text1:
+                    if not re.search(pattern,item):
+                        index1 = text1.index(item)
+                        if index1 == len(text1)-1:
+                            final += text1[index1]
+                        else:
+                            final += text1[index1] + "\n"
+
     else:
         text1 = FILE_TEXT[files[0]]
         text2 = FILE_TEXT[files[1]]
         text3 = FILE_TEXT[files[2]]
 
-    #working on 1 file
+
 
 
 
