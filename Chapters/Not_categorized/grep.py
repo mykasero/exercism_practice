@@ -1,4 +1,3 @@
-#STATUS 15 passed / 10 failed
 import re
 
 FILE_TEXT = {
@@ -41,12 +40,7 @@ The grep command supports the following flags:
 
 
 def grep(pattern, flags, files):
-    text1 = ""
-    text2 = ""
-    text3 = ""
-
     final = ""
-
     flag_list = flags.split()
 
     # working on 1 file
@@ -75,15 +69,12 @@ def grep(pattern, flags, files):
                         else:
                             final += str(line_num) + ":" + text1[index1] + "\n"
 
-            if flag == "-l":
-                keys = list(FILE_TEXT.keys())
-                index = keys.index(files[0])
-                for item in text1:
-                    if re.search(pattern.lower(),item.lower()):
-                        final = keys[index] + "\n"
+
 
             if flag == "-x":
                 for item in text1:
+                    # test1 = item.find(pattern)
+                    # x = re.search(pattern, item)
                     if re.search(pattern, item) and len(pattern) == len(item):
                         index1 = text1.index(item)
                         final += text1[index1] + "\n"
@@ -105,14 +96,114 @@ def grep(pattern, flags, files):
                         else:
                             final += text1[index1] + "\n"
 
+            if flag == "-l":
+                keys = list(FILE_TEXT.keys())
+                index = keys.index(files[0])
+                for item in text1:
+                    if re.search(pattern.lower(),item.lower()):
+                        final = keys[index] + "\n"
+
+    #working on multiple files
+
     else:
-        text1 = FILE_TEXT[files[0]]
-        text2 = FILE_TEXT[files[1]]
-        text3 = FILE_TEXT[files[2]]
+        final_group = []
+
+        for title in files:
+            text1 = FILE_TEXT[title].split("\n")
+            for flag in flag_list:
+                if flag == "":
+                    for item in text1:
+                        if item.find(pattern) > 0:
+                            index1 = text1.index(item)
+                            final += title+":"+text1[index1] + "\n"
+
+                if flag == "-n":
+                    for i in range(len(text1)):
+                        line_num = i + 1
+                        if "-i" in flag_list:
+                            if re.search(pattern.lower(), text1[i].lower()):
+                                index1 = text1.index(text1[i])
+                                if len(flag_list) > 1:
+                                    final += title+":"+str(line_num) + ":"
+                                else:
+                                    final += title+":"+str(line_num) + ":" + text1[index1] + "\n"
+                        else:
+                            if re.search(pattern, text1[i]):
+                                index1 = text1.index(text1[i])
+                                if len(flag_list) > 1:
+                                    final += title+":"+str(line_num) + ":"
+                                else:
+                                    final += title+":"+str(line_num) + ":" + text1[index1] + "\n"
+
+                if flag == "-l":
+                    for item in text1:
+                        if re.search(pattern.lower(), item.lower()):
+                            final = title + "\n"
+
+                if flag == "-x":
+                    if len(flag_list) == 1:
+                        for item in text1:
+
+                            if re.search(pattern, item) and len(pattern) == len(item):
+                                index1 = text1.index(item)
+                                final += title + ":" + text1[index1] + "\n"
+
+                if flag == "-i":
+                    pattern = pattern.lower()
+                    for item in text1:
+                        if re.search(pattern.lower(), item.lower()):
+                            index1 = text1.index(item)
+                            if "-n" in flag_list:
+                                final += text1[index1] + "\n"
+                            else:
+                                final += title + ":" + text1[index1] + "\n"
+
+                if flag == "-v":
+                    final = ""
+                    for item in text1:
+                        if not re.search(pattern, item) and item != "":
+                            final += title + ":" + item + "\n"
+            if final != "":
+                final_group.append(final)
+                final = ""
 
 
+        if len(final_group) > 1:
+            for item in final_group:
+                final += item
+        else:
+            if final_group != []:
+                final = final_group[0]
+            else:
+                final = ""
 
 
-
-    STOP = "STOP"
     return final
+
+
+'''
+Instructions
+Search files for lines matching a search string and return all matching lines.
+
+The Unix grep command searches files for lines that match a regular expression. 
+Your task is to implement a simplified grep command, which supports searching for fixed strings.
+
+The grep command takes three arguments:
+
+The string to search for.
+Zero or more flags for customizing the command's behavior.
+One or more files to search in.
+It then reads the contents of the specified files (in the order specified), finds the lines that contain the search string, 
+and finally returns those lines in the order in which they were found. When searching in multiple files, each matching line is prepended by the file name and a colon (':').
+
+Flags
+The grep command supports the following flags:
+
+-n Prepend the line number and a colon (':') to each line in the output, placing the number after the filename (if present).
+-l Output only the names of the files that contain at least one matching line.
+-i Match using a case-insensitive comparison.
+-v Invert the program -- collect all lines that fail to match.
+-x Search only for lines where the search string matches the entire line.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/grep/canonical-data.json
