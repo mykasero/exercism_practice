@@ -7,8 +7,19 @@ class LedgerEntry:
         # first | at 11th spot, second at 39th, total len 0-51
         self.date = datetime.strftime(date,"%m/%d/%Y")
         self.description = description
-        if change < 0:
-            self.change = "(X" + str(change)[0:len(str(change))-2].replace("-","") + "." + str(change)[len(str(change))-2:len(str(change))] + ")"
+        if change < -99:
+            self.change = "(X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))] + ")"
+            self.change = self.change.replace("-","")
+        elif -99 <= change < -9:
+            self.change = "(X0." + str(change)[len(str(change)) - 2:len(str(change))] + ")"
+            self.change = self.change.replace("-", "")
+        elif -9 <= change < 0:
+            self.change = "(X0.0" + str(change)[len(str(change)) - 1] + ")"
+            self.change = self.change.replace("-", "")
+        elif 0 <= change < 10:
+            self.change = "X0.0" + str(change)[len(str(change)) - 1]
+        elif 10 <= change < 1000:
+            self.change = "X0." + str(change)[len(str(change)) - 1]
         else:
             self.change = "X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))]
 
@@ -33,17 +44,18 @@ def format_entries(currency, locale, entries):
 
     '''
     lens
-    p1 = 12 ends with | 
+    p1 = 12 ends with |
     p2 = 28 (space at the start) ends with |
     p3 = 14 (space at the start)
     '''
 
-    final = []
+    lines = []
+    final = ""
     if not entries:
         return template
 
     else:
-        final.append(template+"\n")
+        lines.append(template)
 
         if locale == "en_US":
 
@@ -60,7 +72,16 @@ def format_entries(currency, locale, entries):
                     p3 = " " + (13-len(p3)) * " " + p3
 
                 new_line = p1 + p2 + p3
-                final.append(new_line)
+                lines.append(new_line)
                 new_line = ""
 
+        for i in range(len(lines)):
+            if i < len(lines)-1:
+                final += lines[i] + "\n"
+            else:
+                final += lines[i]
+
         return final
+
+
+
