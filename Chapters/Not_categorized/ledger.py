@@ -73,8 +73,14 @@ def format_entries(currency, locale, entries):
 
                 if len(p1) < 12:
                     p1 += (11-len(p1)) * " " + "|"
-                if len(p2) < 28:
+                if len(p2) < 26:
                     p2 = " " + p2 + (26-len(p2)) * " " + "|"
+                
+                #if desc longer or equal to len 26, cut the text and add ...
+                elif len(" "+p2) >= 26:
+                    p2 = " " + p2[:22] + "..." + " " + "|"
+
+
                 if len(p3) < 14:
                     p3 = " " + (13-len(p3)) * " " + p3
 
