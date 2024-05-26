@@ -5,8 +5,10 @@ from datetime import datetime
 class LedgerEntry:
     def __init__(self, date, description, change):
         # first | at 11th spot, second at 39th, total len 0-51
-        self.date = datetime.strftime(date,"%m/%d/%Y")
+        self.date = date
         self.description = description
+
+        #formatting the change, X is a placeholder to later be replaced by a currency symbol
         if change < -99:
             self.change = "(X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))] + ")"
             self.change = self.change.replace("-","")
@@ -60,8 +62,13 @@ def format_entries(currency, locale, entries):
         if locale == "en_US":
 
             for item in entries:
-                p1 = item.date
+                #convert date to US standard
+                p1 = datetime.strftime(item.date,"%m/%d/%Y")
+
+
                 p2 = item.description
+
+                #replace placeholder with currency symbol
                 p3 = item.change.replace("X",currencies[currency])
 
                 if len(p1) < 12:
@@ -75,11 +82,16 @@ def format_entries(currency, locale, entries):
                 lines.append(new_line)
                 new_line = ""
 
+        stop = "STOP"
+
+        #turn list into a string with new liners
         for i in range(len(lines)):
             if i < len(lines)-1:
                 final += lines[i] + "\n"
             else:
                 final += lines[i]
+
+
 
         return final
 
