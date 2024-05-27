@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#STATUS: 8 passed, 3 failed
 from datetime import datetime
 
 
