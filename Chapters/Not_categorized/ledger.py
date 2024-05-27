@@ -4,34 +4,38 @@ from datetime import datetime
 
 class LedgerEntry:
     def __init__(self, date, description, change):
-        # first | at 11th spot, second at 39th, total len 0-51
         self.date = date
         self.description = description
+        self.change = change
 
-        #formatting the change, X is a placeholder to later be replaced by a currency symbol
-        if change < -99:
-            self.change = "(X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))] + ")"
-            self.change = self.change.replace("-","")
-        elif -99 <= change < -9:
-            self.change = "(X0." + str(change)[len(str(change)) - 2:len(str(change))] + ")"
-            self.change = self.change.replace("-", "")
-        elif -9 <= change < 0:
-            self.change = "(X0.0" + str(change)[len(str(change)) - 1] + ")"
-            self.change = self.change.replace("-", "")
-        elif 0 <= change < 10:
-            self.change = "X0.0" + str(change)[len(str(change)) - 1]
-        elif 10 <= change < 1000:
-            self.change = "X0." + str(change)[len(str(change)) - 1]
-        else:
-            self.change = "X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))]
-
-        STOP = "STOP"
 
 
 def create_entry(date, description, change):
     entry = LedgerEntry(datetime.strptime(date, '%Y-%m-%d'), description, change)
 
     return entry
+
+def money_format(change):
+    formatted = ""
+
+    # formatting the change, X is a placeholder to later be replaced by a currency symbol
+    if change < -99:
+        formatted = "(X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))] + ")"
+        formatted  = formatted.replace("-","")
+    elif -99 <= change < -9:
+        formatted  = "(X0." + str(change)[len(str(change)) - 2:len(str(change))] + ")"
+        formatted  = formatted.replace("-", "")
+    elif -9 <= change < 0:
+        formatted  = "(X0.0" + str(change)[len(str(change)) - 1] + ")"
+        formatted  = formatted.replace("-", "")
+    elif 0 <= change < 10:
+        formatted  = "X0.0" + str(change)[len(str(change)) - 1]
+    elif 10 <= change < 1000:
+        formatted  = "X0." + str(change)[len(str(change)) - 1]
+    else:
+        formatted  = "X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))]
+
+    return formatted
 
 
 def format_entries(currency, locale, entries):
@@ -42,7 +46,7 @@ def format_entries(currency, locale, entries):
     p3 = ""
     new_line = ""
 
-    currencies = {"USD" : "$", "EUR" : "€"}
+    currencies_dict = {"USD" : "$", "EUR" : "€"}
 
     '''
     lens
@@ -60,42 +64,113 @@ def format_entries(currency, locale, entries):
         lines.append(template)
 
         if locale == "en_US":
+            years = []
+            months = []
+            days = []
+            desc = []
+            currencies = []
+            total = []
 
+            last = []
             for item in entries:
-                #convert date to US standard
-                p1 = datetime.strftime(item.date,"%m/%d/%Y")
+                years.append(item.date.year)
+                months.append(item.date.month)
+                days.append(item.date.day)
+                desc.append(item.description)
+                currencies.append(item.change)
+                total.append([item.date.year,item.date.month,item.date.day,item.description,item.change])
+
+            if len(list(set(years))) == 1 and len(list(set(months))) == 1 and len(list(set(days))) > 1:
+                days.sort()
+
+                for i in range(len(days)):
+                    for j in range(len(total)):
+                        if days[i] == total[j][2]:
+                            last.append(total[j])
+            else:
+                currencies.sort()
+
+                for i in range(len(currencies)):
+                    for j in range(len(total)):
+                        if currencies[i] == total[j][4]:
+                            last.append(total[j])
+
+            for item in last:
+                p1 = datetime.strftime(datetime(item[0],item[1],item[2]),"%m/%d/%Y") #formatting to m/d/Y
+                p2 = item[3]
+                p3 = money_format(item[4]).replace("X",currencies_dict[currency]) #replacing placeholder with currency symbol
 
 
-                p2 = item.description
-
-                #replace placeholder with currency symbol
-                p3 = item.change.replace("X",currencies[currency])
-
+                # adding whitespace to align the desired formatting
                 if len(p1) < 12:
                     p1 += (11-len(p1)) * " " + "|"
+
                 if len(p2) < 26:
                     p2 = " " + p2 + (26-len(p2)) * " " + "|"
-                
-                #if desc longer or equal to len 26, cut the text and add ...
                 elif len(" "+p2) >= 26:
                     p2 = " " + p2[:22] + "..." + " " + "|"
 
 
                 if len(p3) < 14:
-                    p3 = " " + (13-len(p3)) * " " + p3
+                    if "(" in p3:
+                        p3 = " " + (13-len(p3)) * " " + p3
+                    else:
+                        p3 = " " + (12 - len(p3)) * " " + p3 + " "
 
                 new_line = p1 + p2 + p3
                 lines.append(new_line)
                 new_line = ""
 
-        stop = "STOP"
+            # #turn list into a string with new liners
+            for i in range(len(lines)):
+                if i < len(lines)-1:
+                    final += lines[i] + "\n"
+                else:
+                    final += lines[i]
 
-        #turn list into a string with new liners
-        for i in range(len(lines)):
-            if i < len(lines)-1:
-                final += lines[i] + "\n"
-            else:
-                final += lines[i]
+
+            STOP = "STOP"
+
+
+
+
+        #         #convert date to US standard
+        #         p1 = datetime.strftime(item.date,"%m/%d/%Y")
+        #
+        #         p1_year = item.date.year
+        #         p1_month = item.date.month
+        #         p1_day = item.date.day
+        #         p1_info.append([p1_year,p1_month,p1_day])
+        #
+        #
+        #         p2 = item.description
+        #
+        #         #replace placeholder with currency symbol
+        #         p3 = item.change.replace("X",currencies[currency])
+        #
+        #         if len(p1) < 12:
+        #             p1 += (11-len(p1)) * " " + "|"
+        #         if len(p2) < 26:
+        #             p2 = " " + p2 + (26-len(p2)) * " " + "|"
+        #         elif len(" "+p2) >= 26:
+        #             p2 = " " + p2[:22] + "..." + " " + "|"
+        #
+        #
+        #         if len(p3) < 14:
+        #             p3 = " " + (13-len(p3)) * " " + p3
+        #
+        #         new_line = p1 + p2 + p3
+        #         lines.append(new_line)
+        #         new_line = ""
+        #
+        # stop = "STOP"
+        #
+        # #turn list into a string with new liners
+        # for i in range(len(lines)):
+        #     if i < len(lines)-1:
+        #         final += lines[i] + "\n"
+        #     else:
+        #         final += lines[i]
 
 
 
