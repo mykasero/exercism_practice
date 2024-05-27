@@ -19,7 +19,13 @@ def money_format(change):
     formatted = ""
 
     # formatting the change, X is a placeholder to later be replaced by a currency symbol
-    if change < -99:
+    if change < -100000:
+        formatted = "(X" + str(change)[1] + "," + str(change)[2:5] + "." + str(change)[5:len(str(change))] + ")"
+    elif -100000 < change < -10000:
+        formatted = "(X" + str(change)[1:4] + "." + str(change)[4:len(str(change))] + ")"
+    elif -10000 < change < -1000:
+        formatted = "(X" + str(change)[1:3] + "." + str(change)[3:len(str(change))] + ")"
+    elif -1000 <= change < -99:
         formatted = "(X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))] + ")"
         formatted  = formatted.replace("-","")
     elif -99 <= change < -9:
@@ -32,6 +38,8 @@ def money_format(change):
         formatted  = "X0.0" + str(change)[len(str(change)) - 1]
     elif 10 <= change < 1000:
         formatted  = "X0." + str(change)[len(str(change)) - 1]
+    elif 1000 < change < 10000:
+        formatted = "X" + str(change)[0] + "," + str(change)[1:4] + "," + str(change)[4:len(str(change))-1]
     else:
         formatted  = "X" + str(change)[0:len(str(change))-2] + "." + str(change)[len(str(change))-2:len(str(change))]
 
@@ -61,9 +69,9 @@ def format_entries(currency, locale, entries):
         return template
 
     else:
-        lines.append(template)
-
         if locale == "en_US":
+            lines.append(template)
+
             years = []
             months = []
             days = []
@@ -123,56 +131,18 @@ def format_entries(currency, locale, entries):
 
             # #turn list into a string with new liners
             for i in range(len(lines)):
-                if i < len(lines)-1:
+                if i < len(lines) - 1:
                     final += lines[i] + "\n"
                 else:
                     final += lines[i]
 
+        elif locale == "nl_NL":
+            template = "Datum      | Omschrijving              | Verandering  "
+            lines.append(template)
 
-            STOP = "STOP"
-
-
-
-
-        #         #convert date to US standard
-        #         p1 = datetime.strftime(item.date,"%m/%d/%Y")
-        #
-        #         p1_year = item.date.year
-        #         p1_month = item.date.month
-        #         p1_day = item.date.day
-        #         p1_info.append([p1_year,p1_month,p1_day])
-        #
-        #
-        #         p2 = item.description
-        #
-        #         #replace placeholder with currency symbol
-        #         p3 = item.change.replace("X",currencies[currency])
-        #
-        #         if len(p1) < 12:
-        #             p1 += (11-len(p1)) * " " + "|"
-        #         if len(p2) < 26:
-        #             p2 = " " + p2 + (26-len(p2)) * " " + "|"
-        #         elif len(" "+p2) >= 26:
-        #             p2 = " " + p2[:22] + "..." + " " + "|"
-        #
-        #
-        #         if len(p3) < 14:
-        #             p3 = " " + (13-len(p3)) * " " + p3
-        #
-        #         new_line = p1 + p2 + p3
-        #         lines.append(new_line)
-        #         new_line = ""
-        #
-        # stop = "STOP"
-        #
-        # #turn list into a string with new liners
-        # for i in range(len(lines)):
-        #     if i < len(lines)-1:
-        #         final += lines[i] + "\n"
-        #     else:
-        #         final += lines[i]
-
-
+            '''
+            todo
+            '''
 
         return final
 
