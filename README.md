@@ -49,8 +49,7 @@ Unpacking and multiple assignment 2/3
 
 Classes 5/7
 
-Generators = 1/2
+Generators = 2/2 (1 Medium)
 
 Not categorized = 42/x (10 Medium)
 
-#Come back to poker task one day again
