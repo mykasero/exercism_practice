@@ -3,6 +3,7 @@ FLAT_PITCHES = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"]
 SHARP_TONICS = ["C", "G", "D", "A", "E", "B", "F#", "a", "e", "b", "f#", "c#", "g#", "d#"]
 FLAT_TONICS = ["F", "Bb", "Eb", "Ab", "Db", "Gb", "d", "g", "c", "f", "bb", "eb"]
 INTERVALS = {"m": 1, "M": 2, "A": 3}
+
 def validate_interval_steps(intervals: str):
     return all(char in INTERVALS for char in intervals)
 
@@ -17,6 +18,7 @@ def get_pitches(tonic: str):
         return FLAT_PITCHES
 
     return None
+    
 class Scale:
     def __init__(self, tonic: str):
         self.tonic = tonic
