@@ -51,5 +51,5 @@ Classes 5/7
 
 Generators = 2/2 (1 Medium)
 
-Not categorized = 42/x (10 Medium)
+Not categorized = 42/x (10 Medium) 43 In progress ( medium )
 
