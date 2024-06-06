@@ -39,7 +39,7 @@ Loops 6/6 6 (1 Medium) # Need to study itertools more
 
 Tuples 5/6 4 (2 Medium )
 
-Dictionaries 4/5
+Dictionaries 5/5 (1 Medium)
 
 Dict_methods 4/4 (1 Medium)
 
@@ -47,9 +47,9 @@ Sets 3/5
 
 Unpacking and multiple assignment 2/3
 
-Classes 5/7
+Classes 6/7 (1 Medium)
 
 Generators = 2/2 (1 Medium)
 
-Not categorized = 45/x (13 Medium)
+Not categorized = 44/x (12 Medium)
 
