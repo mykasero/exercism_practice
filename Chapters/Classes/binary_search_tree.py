@@ -56,3 +56,5 @@ class BinarySearchTree:
                 return TreeNode(self.tree[0], commands[0], commands[1])
     def sorted_data(self):
         return sorted(self.tree)
+
+
