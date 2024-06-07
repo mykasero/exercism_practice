@@ -1,3 +1,5 @@
+#STATUS 14/43 Passed
+
 class Rational:
     def __init__(self, numer, denom):
         self.numer = numer
