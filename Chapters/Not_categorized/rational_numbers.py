@@ -1,4 +1,4 @@
-#STATUS 14/43 Passed
+#STATUS 33/43 Passed
 
 class Rational:
     def __init__(self, numer, denom):
@@ -54,13 +54,53 @@ class Rational:
 
 
     def __truediv__(self, other):
-        pass
+        x = self.numer * other.denom
+        y = self.denom * other.numer
+
+        if x < 0 and y < 0:
+            return Rational(abs(x),abs(y))
+        elif y < 0:
+            return Rational(-x ,abs(y))
+        else:
+            return Rational(x, y)
 
     def __abs__(self):
-        pass
+        if self.numer > 1 and self.denom % self.numer == 0:
+            return Rational(abs(self.numer/self.numer),abs(self.denom/self.numer))
+        else:
+            return Rational(abs(self.numer),abs(self.denom))
 
     def __pow__(self, power):
-        pass
+        x = self.numer
+        y = self.denom
+        # if power > 0:
+        for i in range(abs(power)-1):
+            if abs(x) == 1:
+                y *= self.denom
+            else:
+                x *= self.numer
+                y *= self.denom
+
+        if abs(power) % 2 == 0 and (x < 0 or y < 0):
+            x = abs(x)
+            y = abs(y)
+
+        if power == 0:
+            return Rational(1,1)
+
+        elif power > 0:
+            if y < 0:
+                x = -x
+                y = abs(y)
+
+            return Rational(x,y)
+
+        else:
+            if x < 0 :
+                x = abs(x)
+                y = -y
+
+            return Rational(y,x)
 
     def __rpow__(self, base):
         pass
