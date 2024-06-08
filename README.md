@@ -33,9 +33,8 @@ Comparisions 5/5  (1 Medium)
 Lists 6/6 (2 Medium)
 
 List_methods 7/7
-Come back to VLQ some time later
 
-Loops 6/6 6 (1 Medium) # Need to study itertools more
+Loops 6/6 6 (1 Medium)
 
 Tuples 5/6 4 (2 Medium )
 
