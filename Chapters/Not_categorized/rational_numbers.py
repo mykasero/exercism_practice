@@ -1,4 +1,4 @@
-#STATUS 33/43 Passed
+import math
 
 class Rational:
     def __init__(self, numer, denom):
@@ -6,7 +6,50 @@ class Rational:
         self.denom = denom
 
     def __eq__(self, other):
-        return self.numer == other.numer and self.denom == other.denom
+        is_eq = self.numer == other.numer and self.denom == other.denom
+        if is_eq == True:
+            return True
+        else:
+            if self.numer == 0 or other.numer == 0:
+                return True
+            else:
+                x = math.gcd(self.denom,other.denom)
+
+                if (self.numer < 0 or self.denom < 0) and (other.numer < 0 or other.denom < 0):
+                    self.numer = abs(self.numer)
+                    self.denom = abs(self.denom)
+                    other.numer = abs(other.numer)
+                    other.denom = abs(other.denom)
+
+                elif self.denom < 0:
+                    self.numer = -self.numer
+                    self.denom = abs(self.denom)
+
+                elif other.denom < 0:
+                    other.numer = -other.numer
+                    other.denom = abs(other.denom)
+                if x > 1:
+                    if self.denom != x:
+                        if other.numer == 1:
+                            self.numer /= x
+                            self.denom /= x
+                        else:
+                            self.numer /= other.numer
+                            self.denom /= other.numer
+                    elif other.denom != x:
+                        if self.numer == 1:
+                            other.numer /= x
+                            other.denom /= x
+                        else:
+                            other.numer /= self.numer
+                            other.denom /= self.numer
+                else:
+                    if self.numer > other.numer:
+                        self.numer /= self.denom
+                        self.denom /= self.denom
+
+                return self.numer == other.numer and self.denom == other.denom
+
 
     def __repr__(self):
         return f'{self.numer}/{self.denom}'
@@ -73,7 +116,7 @@ class Rational:
     def __pow__(self, power):
         x = self.numer
         y = self.denom
-        # if power > 0:
+
         for i in range(abs(power)-1):
             if abs(x) == 1:
                 y *= self.denom
@@ -102,5 +145,6 @@ class Rational:
 
             return Rational(y,x)
 
+
     def __rpow__(self, base):
-        pass
+        return round(math.exp(math.log(pow(base,self.numer))/self.denom), 8)
