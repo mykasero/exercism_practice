@@ -1,176 +1,59 @@
 class BowlingGame:
     def __init__(self):
-        self.throws = 0
-        self.points = []
-        self.frame = []
-        self.counter = 0
-        self.total = 0
-        self.spare = False
-        self.strike = False
-        self.open = False
-        self.next_throw = False
-        self.nt_ctr = 0
-        self.prev_val = 0
-        # self.next_two_throw = False
+        self.rolled = []
+        self.fin = None
+        self.frame = frame()
+        next(self.frame)
 
-        self.strike_ctr = 0
-
-    def roll(self, pins):
-        self.counter += 1
-
-        if not 0 <= pins <= 10 and self.counter < 18:
-            raise ValueError("invalid fill balls")
-
-        else:
-            self.frame.append(pins)
-
-        if self.frame[0] == 10:
-            self.strike = True
-        else:
-            if self.next_throw == True:
-                if sum(self.frame) < 10:
-                    self.open = True
-                elif sum(self.frame) == 10 and (self.frame[0] != 10 and self.frame[1] != 10):
-                    self.spare = True
-            else:
-                if len(self.frame) == 2:
-                    if sum(self.frame) < 10:
-                        self.open = True
-                    elif sum(self.frame) == 10 and (self.frame[0] != 10 and self.frame[1] != 10):
-                        self.spare = True
-
-
-
-        if self.next_throw == True and self.frame != []:
-            if self.nt_ctr == 0:
-                self.points[-1] += sum(self.frame)
-            elif self.nt_ctr == 1 and len(self.frame) == 1:
-                self.points[-1] += self.frame[0]
-            elif self.nt_ctr == 1 and len(self.frame) == 2:
-                self.points[-1] += self.frame[1]
-
-            if sum(self.frame) < 10:
-                self.nt_ctr += 1
-            else:
-                self.frame = []
-
-            if self.nt_ctr == 2:
-                self.next_throw = False
-                self.frame = self.frame[1:]
-
-
-
-        if self.open == True:
-            self.points.append(sum(self.frame))
-            if self.next_throw == False:
-                self.frame = []
-            self.open = False
-
-        if self.spare == True:
-            self.points.append(sum(self.frame))
-            self.frame = []
-            self.spare = False
-            self.next_throw = True
-
-        if self.strike == True:
-            self.points.append(10)
-            self.frame = []
-            self.strike = False
-            self.next_throw = True
-
-
-
-        self.prev_val = pins
-
-
-
-
-
-
-        # if self.strike == True:
-        #     if pins != 10:
-        #         self.points.append(pins)
-        #         self.strike_ctr += 1
-        #         if self.strike_ctr == 2:
-        #             self.strike = False
-        #     elif len(self.frame) == 2 and self.frame[0] + self.frame[1] == 20:
-        #         self.points.append(20)
-        #
-        #
-        #     # if len(self.frame) == 1:
-        #     #     if self.frame[0] != 10:
-        #     #         self.points.append(2*self.points[-1])
-        #     #         self.points.append(10)
-        #     #         self.points.append(pins)
-        #     #         self.strike_ctr +=1
-        #     # else:
-        #     #     if self.frame[0] != 10 and self.frame[1] != 10:
-        #     #         self.points.append(pins)
-        #     #         self.strike_ctr += 1
-        #     #         # if self.strike_ctr == 2:
-        #     #         #     self.strike = False
-        #     #
-        #     #     elif self.frame[0] == 10 and self.frame[1] != 10:
-        #     #         self.points.append(10)
-        #     #         self.strike_ctr += 1
-        #     #         # if self.strike_ctr == 2:
-        #     #         #     self.strike = False
-        #     #
-        #     #     elif len(self.frame) == 2 and self.frame[0] + self.frame[1] == 20:
-        #     #         self.points.append(20)
-        #
-        #     if self.strike_ctr == 2:
-        #         self.strike = False
-        #
-        # if self.spare == True:
-        #     self.points[-1] += pins
-        #     self.spare = False
-        #
-        # if len(self.frame) == 2 and self.frame[0] + self.frame[1] > 10:
-        #     total = self.frame[0] + self.frame[1]
-        #     if self.counter < 20:
-        #         raise ValueError("invalid fill balls")
-        #     elif self.counter >= 20 and (total >= 21 or total < 20) or self.counter >= 20 and len(self.frame) == 1:
-        #         raise IndexError("cannot throw bonus with an open tenth frame")
-        #
-        #
-        # elif pins > 10 and self.counter >= 18:
-        #     raise IndexError("cannot throw bonus with an open tenth frame")
-        #
-        # elif len(self.frame) == 1 and self.frame[0] == 10 and self.strike == False:
-        #     # self.points.append(10)
-        #     #self.frame = []
-        #     self.strike = True
-        # elif len(self.frame) == 2 and self.frame[0] + self.frame[1] == 20 and self.strike == True:
-        #     self.points[-1] += 10
-        #     self.frame = []
-        #     self.strike = False
-        # elif len(self.frame) == 2 and self.frame[0] + self.frame[1] == 10:
-        #     self.points.append(10)
-        #     self.frame = []
-        #     self.spare = True
-        # elif len(self.frame) == 2 and self.frame[0] + self.frame[1] != 10:
-        #     self.points.append(self.frame[0])
-        #     self.points.append(self.frame[1])
-        #     self.frame = []
-
-
-        STOP = "TEST"
-        # if sum(self.points) == 0 and self.counter > 20:
-        #     raise ValueError("invalid fill balls")
+    def roll(self, pines):
+        if not 10 >= pines >= 0:
+            raise ValueError(f"Invalid pines number: {pines}")
+        
+        self.fin = self.frame.send(pines)
+        self.rolled.append(pines)
 
     def score(self):
-        # if self.points == []:
-        #     raise ValueError("invalid fill balls")
-        # else:
-        #     for item in self.points:
-        #         self.total += item
+        if not self.fin:
+            raise IndexError("More balls required")
+        
+        total = i = 0
+        
+        for _ in range(10):
+            s = sum(self.rolled[i:i + 2])
+            
+            if 10 in (self.rolled[i], s):
+                s += self.rolled[i + 2]
+            total += s
 
-        # if self.total == 0:
-        #     raise ValueError("invalid fill balls")
+            if self.rolled[i] == 10:
+                i += 1
+            else:
+                i += 2
 
-        for item in self.points:
-            self.total += item
+        return total
 
-        return self.total
-
+def frame():
+    for i in range(10):
+        first = yield
+        
+        if first == 10:
+            continue
+        
+        second = yield
+        
+        if first + second > 10:
+            raise ValueError("Wrong number of pines in frame")
+    
+    if first == 10:
+        a = yield
+        b = yield
+        
+        if a + b > 10 and a != 10:
+            raise ValueError("wrong number of pines in frame")
+   
+    elif first + second == 10:
+        yield
+    
+    yield True
+    
+    raise IndexError("End of game")
