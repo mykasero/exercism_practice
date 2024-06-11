@@ -1,5 +1,3 @@
-#trying a cleaner approach
-
 class BowlingGame:
     def __init__(self):
         self.throws = 0
@@ -11,6 +9,8 @@ class BowlingGame:
         self.strike = False
         self.open = False
         self.next_throw = False
+        self.nt_ctr = 0
+        self.prev_val = 0
         # self.next_two_throw = False
 
         self.strike_ctr = 0
@@ -24,18 +24,46 @@ class BowlingGame:
         else:
             self.frame.append(pins)
 
-
-        if len(self.frame) == 2:
-            if sum(self.frame) < 10:
-                self.open = True
-            elif sum(self.frame) == 10 and (self.frame[0] != 10 and self.frame[1] != 10):
-                self.spare = True
+        if self.frame[0] == 10:
+            self.strike = True
+        else:
+            if self.next_throw == True:
+                if sum(self.frame) < 10:
+                    self.open = True
+                elif sum(self.frame) == 10 and (self.frame[0] != 10 and self.frame[1] != 10):
+                    self.spare = True
             else:
-                self.strike = True
+                if len(self.frame) == 2:
+                    if sum(self.frame) < 10:
+                        self.open = True
+                    elif sum(self.frame) == 10 and (self.frame[0] != 10 and self.frame[1] != 10):
+                        self.spare = True
+
+
+
+        if self.next_throw == True and self.frame != []:
+            if self.nt_ctr == 0:
+                self.points[-1] += sum(self.frame)
+            elif self.nt_ctr == 1 and len(self.frame) == 1:
+                self.points[-1] += self.frame[0]
+            elif self.nt_ctr == 1 and len(self.frame) == 2:
+                self.points[-1] += self.frame[1]
+
+            if sum(self.frame) < 10:
+                self.nt_ctr += 1
+            else:
+                self.frame = []
+
+            if self.nt_ctr == 2:
+                self.next_throw = False
+                self.frame = self.frame[1:]
+
+
 
         if self.open == True:
             self.points.append(sum(self.frame))
-            self.frame = []
+            if self.next_throw == False:
+                self.frame = []
             self.open = False
 
         if self.spare == True:
@@ -45,19 +73,14 @@ class BowlingGame:
             self.next_throw = True
 
         if self.strike == True:
-            if self.frame[1] != 10:
-                self.points.append(20 + self.frame[1])
-            else:
-                self.points.append(30)
-
+            self.points.append(10)
             self.frame = []
             self.strike = False
             self.next_throw = True
 
-        if self.next_throw == True and self.frame != []:
-            self.points[-1] += self.frame[0]
-            self.next_throw = False
 
+
+        self.prev_val = pins
 
 
 
@@ -150,3 +173,4 @@ class BowlingGame:
             self.total += item
 
         return self.total
+
