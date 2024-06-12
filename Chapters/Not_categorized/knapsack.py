@@ -53,6 +53,23 @@ def maximum_value(maximum_weight, items):
 
             r += 1
 
+        '''
+        Permutations version would work but it's too slow
+         while r < len(weights):
+            x = itertools.permutations(weights, r)
+            y = itertools.permutations(values, r)
+            for i_x, i_y in zip(x, y):
+                total_wt = sum(i_x)
+
+                if total_wt <= maximum_weight:
+                    total_val = sum(i_y)
+                    totals_list.append(total_val)
+                else:
+                    # all_vals.append(total_val)
+                    total_wt = 0
+                    total_val = 0
+            r += 1
+        '''
 
 
 
