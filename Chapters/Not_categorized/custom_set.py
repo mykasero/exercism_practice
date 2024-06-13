@@ -123,3 +123,13 @@ class CustomSet:
                 for i in range(len(self.elements)):
                     if item < self.elements[i]:
                         self.elements = self.elements[:i] + [item] + self.elements[i:]
+
+'''
+Instructions
+Create a custom set type.
+
+Sometimes it is necessary to define a custom data structure of some type, like a set. 
+In this exercise you will define your own set. How it works internally doesn't matter, as long as it behaves like a set of unique elements.
+'''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/custom-set/canonical-data.json
