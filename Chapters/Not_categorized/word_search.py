@@ -28,7 +28,7 @@ class WordSearch:
             part = []
 
         # normal search (left to right, checking only every row) all tests passed
-        # split this maybe into functions : normal search, backwards search (right to left, every row), top down and down top
+        # split this maybe into functions : normal search, backwards search (right to left, every row), top down and down top and diagonal
         for row in range(len(splitted)):
             if begin_point is not None and end_point is not None:
                 temp_word = splitted[begin_point.y][begin_point.x:end_point.x + 1]
