@@ -1,4 +1,3 @@
-#STATUS 14/24 passed
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -29,7 +28,24 @@ class WordSearch:
 
         # normal search (left to right, checking only every row) all tests passed
         # split this maybe into functions : normal search, backwards search (right to left, every row), top down and down top and diagonal
-        for row in range(len(splitted)):
+
+        left_right = self.left_right(splitted)
+
+
+        if left_right[0] == True:
+            return left_right[1], left_right[2]
+
+
+        STOP = "TEST"
+
+    def left_right(self,split_chars):
+        splitted = split_chars
+        begin_point = None
+        end_point = None
+        word_found = False
+        check_word = ""
+
+        for row in range(len(splitted)+1):
             if begin_point is not None and end_point is not None:
                 temp_word = splitted[begin_point.y][begin_point.x:end_point.x + 1]
                 check_word = "".join(temp_word)
@@ -37,8 +53,13 @@ class WordSearch:
                 if check_word != self.word:
                     begin_point = None
                     end_point = None
+                    if row == len(splitted) + 1:
+                        break
                 else:
+                    word_found = True
+                    #splitted.pop(row)
                     break
+
             elif begin_point is not None and end_point is None:
                 begin_point = None
                 end_point = None
@@ -56,10 +77,4 @@ class WordSearch:
                     test_e_p = (column,row)
                     break
 
-
-        STOP = "TEST"
-
-        if begin_point is None or end_point is None:
-            return None
-        else:
-            return begin_point, end_point
+        return [word_found, begin_point, end_point]
