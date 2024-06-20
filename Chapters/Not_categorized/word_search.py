@@ -68,3 +68,5 @@ Words can be hidden in all kinds of directions: left-to-right, right-to-left, ve
 
 Given a puzzle and a list of words return the location of the first and last letter of each word.
 '''
+# These tests are auto-generated with test data from:
+# https://github.com/exercism/problem-specifications/tree/main/exercises/word-search/canonical-data.json
