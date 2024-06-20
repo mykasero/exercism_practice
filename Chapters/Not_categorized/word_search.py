@@ -1,4 +1,4 @@
-#STATUS works for left to right
+#STATUS works for left to right 12/24 Passed
 import itertools
 class Point:
     def __init__(self, x, y):
