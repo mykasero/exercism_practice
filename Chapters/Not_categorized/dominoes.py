@@ -1,73 +1,30 @@
-# STATUS 10/13 PASSED
-
-# maybe try permutations of every combination with simpler if conditions
-
+from itertools import permutations
 
 def can_chain(dominoes):
-    #sort reversed for easier pop
-
-    dominoes = sorted(dominoes,key=lambda x: x[0])[::-1]
-
-    if dominoes == []:
+    if not dominoes:
         return []
-    else:
-        new_dominoes = [dominoes.pop()]
 
-
-    tmp_domino = []
-    i= 1
-
-
-    while dominoes != []: # THE CHAIN SHOULD BE CONTINUOUS, THERE ARE NO GROUPS OF CHAINS!!!
-        tmp_domino = dominoes[-1]
-
-        if i > len(dominoes):
-            # new_dominoes = None
-            break
-
-        if new_dominoes[-1][1] == tmp_domino[0]:
-            new_dominoes.append(tmp_domino)
-            dominoes.pop()
-            tmp_domino = []
-            i=1
-
+    if len(dominoes) == 1:
+        if dominoes[0][0] == dominoes[0][1]:
+            return dominoes
         else:
-            tmp_domino = tmp_domino[::-1]
-
-            if new_dominoes[-1][1] == tmp_domino[0]:
-                new_dominoes.append(tmp_domino)
-                dominoes.pop()
-                tmp_domino = []
-                i = 1
-            else:
-                new_dominoes[-1] = new_dominoes[-1][::-1]
-
-                if new_dominoes[-1][1] == tmp_domino[0]:
-                    new_dominoes.append(tmp_domino)
-                    dominoes.pop()
-                    tmp_domino = []
-                    i = 1
-
-                else:
-                    tmp_domino = tmp_domino[::-1]
-
-                    if new_dominoes[-1][1] == tmp_domino[0]:
-                        new_dominoes.append(tmp_domino)
-                        dominoes.pop()
-                        tmp_domino = []
-                        i = 1
-
-                    else:
-                        i += 1
-
-
-    if dominoes == []:
-        if (len(new_dominoes) == 1 and new_dominoes[0][0] != new_dominoes[0][1]) or len(new_dominoes) > 1 and new_dominoes[0][0] != new_dominoes[-1][1]:
             return None
 
-        return new_dominoes
+    for chain in permutations(dominoes):
+        if working(chain):
+            return working(chain)
 
-    else:
-        return None
+    return None
 
+def working(chain):
+    links = [chain[0]]
 
+    for domino in chain[1:]:
+        if links[-1][1] == domino[0]:
+            links.append(domino)
+
+        elif links[-1][1] == domino[1]:
+            links.append((domino[1], domino[0]))
+
+    if (len(links) == len(chain) and links[0][0] == links[-1][1]):
+        return links
