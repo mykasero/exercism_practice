@@ -1,5 +1,8 @@
 # STATUS 10/13 PASSED
 
+# maybe try permutations of every combination with simpler if conditions
+
+
 def can_chain(dominoes):
     #sort reversed for easier pop
 
