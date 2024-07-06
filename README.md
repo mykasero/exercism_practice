@@ -36,7 +36,7 @@ List_methods 7/7
 
 Loops 6/6 6 (1 Medium)
 
-Tuples 5/6 4 (2 Medium )
+Tuples 6/6 (3 Medium )
 
 Dictionaries 5/5 (1 Medium)
 
@@ -50,5 +50,5 @@ Classes 6/7 (1 Medium)
 
 Generators = 2/2 (1 Medium)
 
-Not categorized = 58/x (26 Medium)
+Not categorized = 59/x (27 Medium)
 
