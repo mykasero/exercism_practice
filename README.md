@@ -50,5 +50,5 @@ Classes 6/7 (1 Medium)
 
 Generators = 2/2 (1 Medium)
 
-Not categorized = 60/x (28 Medium)
+Not categorized = 60/x (28 Medium) 61 in progress ( medium )
 
