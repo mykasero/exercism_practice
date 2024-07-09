@@ -1,4 +1,4 @@
-# STATUS = 13/23 passed
+# STATUS = 16/23 passed
 
 class SgfTree:
     def __init__(self, properties=None, children=None):
@@ -53,6 +53,7 @@ def parse(input_string):
             elif input_string[i] == ")" and child_flag == True:
                 children.append(tmp_child)
                 child_flag = False
+                tmp_child = ""
             elif input_string[i] == "[":
                 is_property_key = False
             elif input_string[i].islower() and is_property_key == True:
@@ -100,10 +101,59 @@ def parse(input_string):
 
         for key,value in zip(keys,vals):
             prop_dict[key] = [value]
-        x = prop_dict.items()
+
+        props = str_to_dict(properties)
+
+        sgf_childs = []
+        for item in children:
+            sgf_childs.append(SgfTree(str_to_dict(item)))
+
+        stop = "stop"
 
 
+        #returning properties and children returning works correctly, now special items
 
-        #returning properties works correctly, now need to add children returning, after that cleaning special items
+        return SgfTree(props, sgf_childs)
 
-        return SgfTree(prop_dict)
+def str_to_dict(item):
+    #find a better way to deal with backslash pairs and other special items like ( ] etc
+    prop_dict = dict()
+    keys = []
+    vals = []
+    tmp_val = ""
+    is_property_key = True
+    for i in range(len(item)):
+        if item[i] == "[":
+            is_property_key = False
+
+        elif item[i] == "]" and is_property_key == False:
+            is_property_key = True
+
+
+        if is_property_key == True and item[i] != "]":
+            keys.append(item[i])
+
+        else:
+            tmp_val += item[i]
+            if item[i] == "]":
+                if "\t" in tmp_val:
+                    tmp_val = tmp_val.replace("\t", " ")
+                if "\\" in tmp_val:
+                    tmp_val = tmp_val.replace("\\","")
+
+                vals.append(tmp_val)
+                tmp_val = ""
+    if tmp_val != "":
+        vals.append(tmp_val)
+
+
+    # if len(keys) == len(vals):
+    for key, value in zip(keys, vals):
+        if len(vals) > 1 and len(keys) != len(vals):
+            prop_dict[key] = [item[1:-1] for item in vals]
+        else:
+            prop_dict[key] = [value[1:-1]]
+    # else:
+
+
+    return prop_dict
