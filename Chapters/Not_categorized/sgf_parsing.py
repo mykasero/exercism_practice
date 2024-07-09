@@ -146,14 +146,12 @@ def str_to_dict(item):
     if tmp_val != "":
         vals.append(tmp_val)
 
-
-    # if len(keys) == len(vals):
     for key, value in zip(keys, vals):
         if len(vals) > 1 and len(keys) != len(vals):
             prop_dict[key] = [item[1:-1] for item in vals]
         else:
             prop_dict[key] = [value[1:-1]]
-    # else:
+
 
 
     return prop_dict
