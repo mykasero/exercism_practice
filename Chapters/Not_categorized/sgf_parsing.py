@@ -122,11 +122,12 @@ def str_to_dict(item):
     vals = []
     tmp_val = ""
     is_property_key = True
+    db_flag = False
     for i in range(len(item)):
         if item[i] == "[":
             is_property_key = False
 
-        elif item[i] == "]" and is_property_key == False:
+        elif item[i] == "]" and is_property_key == False and db_flag == False:
             is_property_key = True
 
 
@@ -135,23 +136,40 @@ def str_to_dict(item):
 
         else:
             tmp_val += item[i]
-            if item[i] == "]":
+            if "\\" in tmp_val and db_flag == False:
+                tmp_val = tmp_val.replace("\\", "")
+                db_flag = True
+
+            if item[i] == "]" and db_flag == True:
+                db_flag = False
+
+            elif item[i] == "]":
                 if "\t" in tmp_val:
                     tmp_val = tmp_val.replace("\t", " ")
-                if "\\" in tmp_val:
-                    tmp_val = tmp_val.replace("\\","")
+
 
                 vals.append(tmp_val)
                 tmp_val = ""
     if tmp_val != "":
         vals.append(tmp_val)
 
+
+    # if len(keys) == len(vals):
     for key, value in zip(keys, vals):
         if len(vals) > 1 and len(keys) != len(vals):
-            prop_dict[key] = [item[1:-1] for item in vals]
+            if len(keys) == 1:
+                prop_dict[key] = [item[1:-1] for item in vals]
+            else:
+                key_indexes = [item.index(key) for key in keys]
+                # for id_v in range(len(vals)):
+                #     if item.index(vals[id_v][-2]) < key_indexes[1]:
+
+                # something around this, needs more tinkering
+                # prop_dict[key] = [vals[id_v] for id_v in range(len(vals)) if item.index(vals[id_v][-2]) < key_indexes[1]]
+
         else:
             prop_dict[key] = [value[1:-1]]
-
+    # else:
 
 
     return prop_dict
