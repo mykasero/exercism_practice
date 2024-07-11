@@ -1,4 +1,4 @@
-# STATUS = 16/23 passed
+# STATUS = 19/23 passed
 
 class SgfTree:
     def __init__(self, properties=None, children=None):
@@ -49,7 +49,10 @@ def parse(input_string):
         child_flag = False
         for i in range(2,len(input_string)):
             if input_string[i] == ";":
-                child_flag = True
+                if "[" in tmp_prop and not "]" in tmp_prop:
+                    tmp_prop += input_string[i]
+                else:
+                    child_flag = True
             elif input_string[i] == ")" and child_flag == True:
                 children.append(tmp_child)
                 child_flag = False
@@ -69,8 +72,11 @@ def parse(input_string):
                     tmp_prop += input_string[i]
 
             if child_flag == False and input_string[i] == ")":
-                properties.append(tmp_prop)
-                tmp_prop = ""
+                if "(" in tmp_prop and not ")" in tmp_prop:
+                    tmp_prop += input_string[i]
+                else:
+                    properties.append(tmp_prop)
+                    tmp_prop = ""
             elif child_flag == True and input_string[i] == ")":
                 children.append(tmp_child)
                 tmp_child = ""
@@ -124,11 +130,12 @@ def str_to_dict(item):
     is_property_key = True
     db_flag = False
     for i in range(len(item)):
-        if item[i] == "[":
+        if item[i] == "[" and is_property_key == True:
             is_property_key = False
 
         elif item[i] == "]" and is_property_key == False and db_flag == False:
             is_property_key = True
+
 
 
         if is_property_key == True and item[i] != "]":
@@ -138,6 +145,10 @@ def str_to_dict(item):
             tmp_val += item[i]
             if "\\" in tmp_val and db_flag == False:
                 tmp_val = tmp_val.replace("\\", "")
+                if "\t" in tmp_val:
+                    tmp_val = tmp_val.replace("\t", " ")
+                elif "\n" in tmp_val:
+                    tmp_val = tmp_val.replace("\n","")
                 db_flag = True
 
             if item[i] == "]" and db_flag == True:
@@ -153,22 +164,39 @@ def str_to_dict(item):
     if tmp_val != "":
         vals.append(tmp_val)
 
+    if len(vals) > 1 and len(keys) != len(vals):
+        if len(keys) == 1:
+            prop_dict[keys[0]] = [item[1:-1] for item in vals]
+        else:
+            key_indexes = [item.index(key) for key in keys]
+
+            for key in keys[::-1]:
+                for value in vals[::-1]:
+                    prop_dict[key] = prop_dict.get(key, [])
+                    if item.index(value[-2]) > item.index(key):
+                        prop_dict[key] += [value[1:-1]]
+                        vals.pop(-1)
+                prop_dict[key] = prop_dict[key][::-1]
+
+    else:
+        for key,value in zip(keys,vals):
+                prop_dict[key] = [value[1:-1]]
 
     # if len(keys) == len(vals):
-    for key, value in zip(keys, vals):
-        if len(vals) > 1 and len(keys) != len(vals):
-            if len(keys) == 1:
-                prop_dict[key] = [item[1:-1] for item in vals]
-            else:
-                key_indexes = [item.index(key) for key in keys]
+    # for key, value in zip(keys, vals):
+    #     if len(vals) > 1 and len(keys) != len(vals):
+    #         if len(keys) == 1:
+    #             prop_dict[key] = [item[1:-1] for item in vals]
+    #         else:
+    #             key_indexes = [item.index(key) for key in keys]
                 # for id_v in range(len(vals)):
                 #     if item.index(vals[id_v][-2]) < key_indexes[1]:
 
                 # something around this, needs more tinkering
                 # prop_dict[key] = [vals[id_v] for id_v in range(len(vals)) if item.index(vals[id_v][-2]) < key_indexes[1]]
 
-        else:
-            prop_dict[key] = [value[1:-1]]
+        # else:
+        #     prop_dict[key] = [value[1:-1]]
     # else:
 
 
