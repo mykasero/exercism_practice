@@ -1,4 +1,4 @@
-# STATUS = 19/23 passed
+# STATUS = 21/23 passed
 
 class SgfTree:
     def __init__(self, properties=None, children=None):
@@ -145,10 +145,10 @@ def str_to_dict(item):
             tmp_val += item[i]
             if "\\" in tmp_val and db_flag == False:
                 tmp_val = tmp_val.replace("\\", "")
-                if "\t" in tmp_val:
-                    tmp_val = tmp_val.replace("\t", " ")
-                elif "\n" in tmp_val:
-                    tmp_val = tmp_val.replace("\n","")
+                # if "\t" in tmp_val:
+                #     tmp_val = tmp_val.replace("\t", " ")
+                # elif "\n" in tmp_val:
+                #     tmp_val = tmp_val.replace("\n","")
                 db_flag = True
 
             if item[i] == "]" and db_flag == True:
@@ -158,9 +158,15 @@ def str_to_dict(item):
                 if "\t" in tmp_val:
                     tmp_val = tmp_val.replace("\t", " ")
 
-
                 vals.append(tmp_val)
                 tmp_val = ""
+
+            if db_flag == True and "\t" in tmp_val:
+                tmp_val = tmp_val.replace("\t", " ")
+            elif db_flag == True and item[i] == "\n":
+                tmp_val = tmp_val.replace("\n", "")
+
+
     if tmp_val != "":
         vals.append(tmp_val)
 
