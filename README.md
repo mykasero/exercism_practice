@@ -2,7 +2,7 @@
 
 PYTHON ROADMAP
 
-Every exercise has a description pasted under the code and the link to the test cases.
+Every exercise has a description pasted under the code and the link to the test cases. (when done with the exercise course, reorganize the files)
 
 Image representation of the chapters 
 <p align = "center">
