@@ -1,4 +1,4 @@
-#STATUS 5/9 passed
+#STATUS 7/9 passed
 
 import json
 class RestAPI:
@@ -9,7 +9,8 @@ class RestAPI:
         self.payload = None
 
     def get(self, url, payload=None):
-        self.payload = json.loads(payload)
+        if payload is not None:
+            self.payload = json.loads(payload)
         self.url = url
 
         if self.url == "/users":
@@ -40,13 +41,28 @@ class RestAPI:
             borrower = self.payload['borrower']
             amount = self.payload['amount']
 
+
+
             for item in self.db['users']:
+
                 if item['name'] == lender:
+                    test1 = [person for person in item['owes'].keys() if person not in [lender, borrower]]
                     item['balance'] += amount
-                    item['owed_by'].update({borrower : amount})
+                    if item['owes'] != {} and test1 == []:
+                        for person in list(item['owes'].keys()):
+                            if person == borrower:
+                                item['owes'][person] -= amount
+                    else:
+                        item['owed_by'].update({borrower : amount})
                 elif item['name'] == borrower:
+                    test2 = [person for person in item['owed_by'].keys() if person not in [lender, borrower]]
                     item['balance'] -= amount
-                    item['owes'].update({lender : amount})
+                    if item['owed_by'] != {} and test2 == []:
+                        for person in list(item['owed_by'].keys()):
+                            if person == lender:
+                                item['owed_by'][person] -= amount
+                    else:
+                        item['owes'].update({lender : amount})
 
             return_val = {'users' : [item for item in self.db['users'] if item['name'] in [lender,borrower]]}
 
