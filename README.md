@@ -50,5 +50,5 @@ Classes 6/7 (1 Medium)
 
 Generators = 2/2 (1 Medium)
 
-Not categorized = 63/x (30 Medium, 1 hard)
+Not categorized = 63/x (30 Medium, 1 hard) 64 ( hard )
 
