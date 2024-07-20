@@ -1,8 +1,7 @@
-/Readme needs better visual rep
+<!--Readme needs better visual rep-->
 
-
-
-'''Every exercise has a description pasted under the code and the link to the test cases, the latter can also be found in the same directory as the exercise. (when done with the exercise course, reorganize the files)'''
+>[!NOTE]
+>Every exercise has a description pasted under the code and the link to the test cases, the latter can also be found in the same directory as the exercise.
 
 
 <p align = "center">
