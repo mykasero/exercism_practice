@@ -9,14 +9,15 @@ Image representation of the chapters
   
 <img src="https://github.com/user-attachments/assets/d9719721-4f5b-48ba-a32f-8259a0502935"/>
 </p>
-<p color = "white", style="text-align:center">
+<h1>
 <b>Chapters completed:</b>
-</p>
-BASICS
+</h1>
 
-NUMBERS 5/5 (5 Easy)
+<p><b>Basics (Completed)
 
-BOOLS 3/3 (3 Easy)
+Numbers 5/5 (5 Easy)
+
+Bools 3/3 (3 Easy)
 
 Conditionals 5/5 (5 Easy)
 
@@ -46,5 +47,5 @@ Classes 7/7 (6 Easy, 1 Medium)
 
 Generators = 2/2 (1 Easy, 1 Medium)
 
-Not categorized = 61/x (32 Easy, 27 Medium, 2 hard)
+Not categorized = 61/x (32 Easy, 27 Medium, 2 hard)<b></p>
 
