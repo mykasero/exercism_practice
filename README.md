@@ -2,7 +2,7 @@
 
 
 
-/Every exercise has a description pasted under the code and the link to the test cases. (when done with the exercise course, reorganize the files)
+'''Every exercise has a description pasted under the code and the link to the test cases, the latter can also be found in the same directory as the exercise. (when done with the exercise course, reorganize the files)'''
 
 
 <p align = "center">
