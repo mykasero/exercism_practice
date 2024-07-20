@@ -1,13 +1,16 @@
 /Readme needs better visual rep
 
-PYTHON ROADMAP
 
-Every exercise has a description pasted under the code and the link to the test cases. (when done with the exercise course, reorganize the files)
 
-Image representation of the chapters 
+/Every exercise has a description pasted under the code and the link to the test cases. (when done with the exercise course, reorganize the files)
+
+
 <p align = "center">
-  
-<img src="https://github.com/user-attachments/assets/d9719721-4f5b-48ba-a32f-8259a0502935"/>
+<b>PYTHON ROADMAP</b>
+<b><br><br>Image representation of the chapters</b>
+
+
+<br><img src="https://github.com/user-attachments/assets/d9719721-4f5b-48ba-a32f-8259a0502935"/>
 </p>
 <h1>
 <b>Chapters completed:</b>
