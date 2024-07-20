@@ -18,37 +18,37 @@ Chapters completed:
 
 BASICS
 
-NUMBERS 5/5
+NUMBERS 5/5 (5 Easy)
 
-BOOLS 3/3
+BOOLS 3/3 (3 Easy)
 
-Conditionals 5/5
+Conditionals 5/5 (5 Easy)
 
-Strings 6/5
+Strings 5/5 (5 Easy)
 
-String_Methods 4/4
+String_Methods 4/4 (4 Easy)
 
-Comparisions 5/5  (1 Medium)
+Comparisions 5/5  (4 Easy, 1 Medium)
 
-Lists 6/6 (2 Medium)
+Lists 6/6 (4 Easy, 2 Medium)
 
-List_methods 7/7
+List_methods 7/7 (6 Easy, 1 Medium)
 
-Loops 6/6 6 (1 Medium)
+Loops 6/6 6 (5 Easy, 1 Medium)
 
-Tuples 6/6 (3 Medium )
+Tuples 6/6 (3 Easy, 3 Medium)
 
-Dictionaries 5/5 (1 Medium)
+Dictionaries 5/5 (4 Easy, 1 Medium)
 
-Dict_methods 4/4 (1 Medium)
+Dict_methods 4/4 (3 Easy, 1 Medium)
 
-Sets 3/5
+Sets 5/5 (4 Easy, 1 Medium)
 
-Unpacking and multiple assignment 2/3
+Unpacking and multiple assignment 4/4 (3 Easy, 1 Medium)
 
-Classes 6/7 (1 Medium)
+Classes 7/7 (6 Easy, 1 Medium)
 
-Generators = 2/2 (1 Medium)
+Generators = 2/2 (1 Easy, 1 Medium)
 
-Not categorized = 63/x (30 Medium, 1 hard) 64 ( hard )
+Not categorized = 64/x (32 Easy, 30 Medium, 2 hard)
 
