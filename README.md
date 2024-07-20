@@ -9,9 +9,9 @@ Image representation of the chapters
   
 <img src="https://github.com/user-attachments/assets/d9719721-4f5b-48ba-a32f-8259a0502935"/>
 </p>
-<p color = "black", style = "bold"></p>
+<p color = "white", style = "bold">
 Chapters completed:
-
+</p>
 BASICS
 
 NUMBERS 5/5 (5 Easy)
