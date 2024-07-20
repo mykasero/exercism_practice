@@ -8,12 +8,8 @@ Image representation of the chapters
 <p align = "center">
   
 <img src="https://github.com/user-attachments/assets/d9719721-4f5b-48ba-a32f-8259a0502935"/>
-
-<img src="https://github.com/mykasero/excercism_practice/assets/58263528/30d3483f-c8b6-4dac-8b3e-d937752e256f"/>
-
-<img src="https://github.com/mykasero/excercism_practice/assets/58263528/191232f0-abb1-4bb1-a7fc-7d9b162aac7a"/>
-
 </p>
+<p color = "black", style = "bold"></p>
 Chapters completed:
 
 BASICS
