@@ -6,10 +6,9 @@
 
 
 <p align = "center">
-<b>PYTHON ROADMAP</b>
-<b><br><br>Image representation of the chapters</b>
-
-
+<b>PYTHON ROADMAP COMPLETION STATUS</b>
+</p>
+<p align = "center">
 <br><img src="https://github.com/user-attachments/assets/d9719721-4f5b-48ba-a32f-8259a0502935"/>
 </p>
 <h1>
